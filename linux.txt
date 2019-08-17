@@ -282,9 +282,11 @@
 		
 	which
 		可执行程序位置
+		不包括内建命令和命令别名，别名是真正的可执行程序的替代物
 		
 	help
 		得到 shell 内建命令的帮助文档
+
 		--help - 显示用法信息
 			[me@linuxbox ~]$ mkdir --help
 			Usage: mkdir [OPTION] DIRECTORY...
