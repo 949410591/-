@@ -84,7 +84,8 @@
 			两个路径用空格隔开  用户家目录（用字符“~”代表）
 
 		选项和参数
-'			command -options arguments
+
+					command -options arguments
 				这是大多数命令的输入格式
 
 			选项 	长选项 				描述
@@ -614,7 +615,7 @@
 			30  set | less
 			39  history | grep set
 
-		数字代表历史列表中的行号，可以用！30来调用行号所代表的命令
+		数字代表历史列表中的行号，可以用!30来调用行号所代表的命令
 
 		按键	行为
 		Ctrl-p	移动到上一个历史条目。类似于上箭头按键。
@@ -704,6 +705,10 @@
 				g 	用户组。
 				o 	"others"的简写，意思是其他所有的人。
 				a 	"all"的简写，是"u", "g"和“o”三者的联合。
+
+			chmod u=x 1.txt
+			chmod uo+x 1.txt
+			chmod u-x 1.txt
 
 	借助 GUI 来设置文件模式
 
