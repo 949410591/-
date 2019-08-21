@@ -749,3 +749,215 @@
 
 		sudo － 以另一个用户身份执行命令
 			sudo 可以使用本用户密码以管理员身份直接执行命令
+
+第十一章
+	进程是怎么工作的
+		系统启动时，会将自己的活动初始化为进程，然后运行init程序（在/etc）。
+		许多系统服务以守护程序进行，守护程序没有用户接口。
+		这样我们没有登录系统也会自己执行些例行事物
+
+		一个程序发动另一个程序被表述为父进程产生一个子进程
+
+		每个进程都有一个pid来表示，init的pid永远是1
+
+	ps 查看进程
+		kk@kk-VirtualBox:~$ ps
+		  PID TTY          TIME CMD
+		 1625 pts/0    00:00:00 bash
+		 1635 pts/0    00:00:00 ps
+		 只是列出当前终端相关的进程，
+		 TTY进程控制终端，
+		 TIME进程所消耗的CPU时间数量
+
+		 kk@kk-VirtualBox:~$ ps x
+		   PID TTY      STAT   TIME COMMAND
+		  1030 ?        Ss     0:00 /lib/systemd/systemd --user
+		  1031 ?        S      0:00 (sd-pam)
+		  1044 ?        SLl    0:00 /usr/bin/gnome-keyring-daemon --daemonize --login
+		  1048 tty1     Ssl+   0:00 /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SH
+			。。。。。。
+			ps x 展示所有进程
+			TTY有？是指没有控制终端
+			STAT是指进程的当前状态
+			状态	含义
+			R	    运行中。这意味着，进程正在运行或准备运行。
+			S	    正在睡眠。进程没有运行，而是，正在等待一个事件，
+			      比如说，一个按键或者网络分组。
+			D	    不可中断睡眠。进程正在等待 I/O，比方说，一个磁盘驱动器的 I/O。
+			T	    已停止. 已经指示进程停止运行。稍后介绍更多。
+			Z	    一个死进程或“僵尸”进程。这是一个已经终止的子进程，
+						但是它的父进程还没有清空它。 （父进程没有把子进程从进程表中删除）
+			<	    一个高优先级进程。这可能会授予一个进程更多重要的资源，
+						给它更多的 CPU 时间。 进程的这种属性叫做 niceness。
+						具有高优先级的进程据说是不好的（less nice）， 因为它占用了比较多的 CPU 时间，
+						这样就给其它进程留下很少时间。
+			N	    低优先级进程。 一个低优先级进程（一个“nice”进程）只有当其它高优先级进程被服务了之后，
+						才会得到处理器时间。
+
+		kk@kk-VirtualBox:~$ ps aux
+			USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+			root         1  0.7  0.4 159852  9188 ?        Ss   16:48   0:03 /sbin/init spla
+			root         2  0.0  0.0      0     0 ?        S    16:48   0:00 [kthreadd]
+			root         3  0.0  0.0      0     0 ?        I<   16:48   0:00 [rcu_gp]
+			root         4  0.0  0.0      0     0 ?        I<   16:48   0:00 [rcu_par_gp]
+			root         6  0.0  0.0      0     0 ?        I<   16:48   0:00 [kworker/0:0H-k
+			root         8  0.0  0.0      0     0 ?        I<   16:48   0:00 [mm_percpu_wq]
+			root         9  0.0  0.0      0     0 ?        S    16:48   0:00 [ksoftirqd/0]
+			root        10  0.0  0.0      0     0 ?        I    16:48   0:00 [rcu_sched]
+			root        11  0.0  0.0      0     0 ?        S    16:48   0:00 [migration/0]
+			root        12  0.0  0.0      0     0 ?        S    16:48   0:00 [idle_inject/0]
+			root        13  0.0  0.0      0     0 ?        I    16:48   0:00 [kworker/0:1-cg
+			root        14  0.0  0.0      0     0 ?        S    16:48   0:00 [cpuhp/0]
+			。。。。。。
+
+			BSD 风格的 ps 命令列标题
+			标题	含义
+			USER	用户 ID. 进程的所有者。
+			%CPU	以百分比表示的 CPU 使用率
+			%MEM	以百分比表示的内存使用率
+			VSZ	  虚拟内存大小
+			RSS	  进程占用的物理内存的大小，以千字节为单位。
+			START	进程启动的时间。若它的值超过24小时，则用天表示。
+
+	top 动态查看进程
+		top - 14:59:20 up 6:30, 2 users, load average: 0.07, 0.02, 0.00
+		Tasks: 109 total,   1 running,  106 sleeping,    0 stopped,    2 zombie
+		Cpu(s): 0.7%us, 1.0%sy, 0.0%ni, 98.3%id, 0.0%wa, 0.0%hi, 0.0%si
+		Mem:   319496k total,   314860k used,   4636k free,   19392k buff
+		Swap:  875500k total,   149128k used,   726372k free,  114676k cach
+
+		 PID  USER       PR   NI   VIRT   RES   SHR  S %CPU  %MEM   TIME+    COMMAND
+		6244  me         39   19  31752  3124  2188  S  6.3   1.0   16:24.42 trackerd
+		....
+
+		top 命令信息字段
+		行号	字段	    意义
+		1	    top     	程序名。
+	      	14:59:20	当前时间。
+		up    6:30	    这是正常运行时间。它是计算机从上次启动到现在所运行的时间。
+		                在这个例子里，系统已经运行了六个半小时。
+		2     users	    有两个用户登录系统。
+		      load
+				  average:	加载平均值是指，等待运行的进程数目，也就是说，
+					          处于可以运行状态并共享 CPU 的进程个数。
+										这里展示了三个数值，每个数值对应不同的时间段。
+										第一个是最后60秒的平均值， 下一个是前5分钟的平均值，
+										最后一个是前15分钟的平均值。若平均值低于1.0，
+										则指示计算机 工作不忙碌。
+
+		2	    Tasks:  	总结了进程数目和这些进程的各种状态。
+		3   	Cpu(s):	  这一行描述了 CPU 正在进行的活动的特性。
+	       	0.7%us	  0.7% 的 CPU 被用于用户进程。这意味着进程在内核之外。
+      		1.0%sy  	1.0%的 CPU 时间被用于系统（内核）进程。
+	      	0.0%ni   	0.0%的 CPU 时间被用于"nice"（低优先级）进程。
+	      	98.3%id	  98.3%的 CPU 时间是空闲的。
+	      	0.0%wa	  0.0%的 CPU 时间来等待 I/O。
+	  4   	Mem:	    展示物理内存的使用情况。
+		5	    Swap:	    展示交换分区（虚拟内存）的使用情况。
+
+
+
+	控制进程
+		实例程序
+			xlogo
+		中断进程
+			ctrl + c
+		程序后台执行
+			kk@kk-VirtualBox:~$ xlogo &
+			[1] 1874
+			任务号+PID
+
+			jobs
+				列出终端中启动的任务
+				kk@kk-VirtualBox:~$ jobs
+				[1]+  运行中               xlogo &
+
+		进程返回前台
+			后台运行的程序对一切来自键盘的输入都免疫，不能用ctrl + c来中断它
+			kk@kk-VirtualBox:~$ fg %1
+			xlogo
+			用fg + %[任务序号]，就可以返回前台
+			再用ctrl + c 就可以中断
+
+		停止一个进程
+			ctrl + z 可以停止一个前台进程
+			kk@kk-VirtualBox:~$ xlogo
+			^Z
+			[1]+  已停止               xlogo
+
+			可以使用fg 来移到前台
+			也可以使用bg移到后台运行
+				kk@kk-VirtualBox:~$ bg %1
+				[1]+ xlogo &
+
+	singnal
+		kill 给进程发送信号
+			kill + pdi/%[任务序号]可以直接终止程序
+
+			kk@kk-VirtualBox:~$ jobs
+			kk@kk-VirtualBox:~$ xlogo &
+			[1] 1957
+			kk@kk-VirtualBox:~$ kill %1
+			kk@kk-VirtualBox:~$ jobs
+			[1]+  已终止               xlogo
+
+			给进程发送信号
+				kill [-signal] PID...
+				常用信号
+					编号	名字	含义
+					1    	HUP	 挂起（Hangup）。这是美好往昔的残留部分，
+										 那时候终端机通过电话线和调制解调器连接到 远端的计算机。
+										 这个信号被用来告诉程序，控制的终端机已经“挂断”。
+										 通过关闭一个终端会话，可以展示这个信号的作用。
+										 在当前终端运行的前台程序将会收到这个信号并终止。
+										 许多守护进程也使用这个信号，来重新初始化。
+										 这意味着，当一个守护进程收到这个信号后，
+										 这个进程会重新启动，并且重新读取它的配置文件。
+										 Apache 网络服务器守护进程就是一个例子。
+
+					2	INT	中断。实现和 Ctrl-c 一样的功能，由终端发送。通常，它会终止一个程序。
+					9	KILL	杀死。这个信号很特别。尽管程序可能会选择不同的方式来处理发送给它的 信号，其中也包含忽略信号，但是 KILL 信号从不被发送到目标程序。而是内核立即终止 这个进程。当一个进程以这种方式终止的时候，它没有机会去做些“清理”工作，或者是保存工作。 因为这个原因，把 KILL 信号看作最后一招，当其它终止信号失败后，再使用它。
+					15	TERM	终止。这是 kill 命令发送的默认信号。如果程序仍然“活着”，可以接受信号，那么 这个它会终止。
+					18	CONT	继续。在一个停止信号后，这个信号会恢复进程的运行。
+					19	STOP	停止。这个信号导致进程停止运行，而不是终止。像 KILL 信号，它不被 发送到目标进程，因此它不能被忽略。
+
+				kill -l
+					显示所有信号列表
+
+					其它常用信号
+	编号	名字	含义
+	3   	QUIT	退出
+	11	  SEGV	段错误(Segmentation Violation)。如果一个程序非法使用内存，
+	            就会发送	这个信号。也就是说， 程序试图写入内存，
+							而这个内存空间是不允许此程序写入的。
+	20  	TSTP	终端停止(Terminal Stop)。当按下 Ctrl-z 组合键后，
+            	终端发送这个信号。不像 STOP 信号，
+             	TSTP 信号由目标进程接收，且可能被忽略。
+	28  	WINCH	改变窗口大小(Window Change)。当改变窗口大小时，
+	            系统会发送这个信号。 一些程序，像 top 和 less 程序会响应这个信号，
+							按照新窗口的尺寸，刷新显示的内容。
+
+
+		killall 给多个进程发送信号
+			通过killall来碓特定程序或者用户名的多个进程发送信号
+				killall [-u user] [-signal] name...
+			kk@kk-VirtualBox:~$ xlogo &
+			[5] 2643
+			[4]   已终止               xlogo
+			kk@kk-VirtualBox:~$ xlogo &
+			[6] 2644
+			kk@kk-VirtualBox:~$ xlogo &
+			[7] 2645
+			kk@kk-VirtualBox:~$ killall xlogo
+			[5]   已终止               xlogo
+			[6]-  已终止               xlogo
+			[7]+  已终止               xlogo
+
+			额kill一样你需要超级用户权限才能给不属于你的进程发送信号
+
+		其它和进程相关的命令
+		命令名	 命令描述
+		pstree	输出一个树型结构的进程列表(processtree)，这个列表展示了进程间父/子关系。
+		vmstat	输出一个系统资源使用快照，包括内存，交换分区和磁盘 I/O。 为了看到连续的显示结果，则在命令名后加上更新操作延时的时间（以秒为单位）。例如，“vmstat 5”。 ，按下 Ctrl-c 组合键, 终止输出。
+		xload  	一个图形界面程序，可以画出系统负载随时间变化的图形。
+		tload 	terminal load与 xload 程序相似，但是在终端中画出图形。使用 Ctrl-c，来终止输出。
