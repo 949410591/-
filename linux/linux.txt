@@ -1,4 +1,4 @@
-﻿第二章
+﻿第二章 什么是shell
 	shell
 		shell就是一个程序，接受键盘输入的命令，然后把命令传递给操作系统去执行。
 
@@ -34,7 +34,7 @@
 		可以通过 Ctrl-Alt-F1 到 Ctrl-Alt-F6 访问
 		返回图形桌面，按下 Alt-F7
 
-第三章
+第三章 文件系统中的跳转
 	文件树
 		我们平常在windows看到的文件层次结构是倒文件树结构，即最上面的是文件的根
 
@@ -70,7 +70,7 @@
 		linux不用扩展名来决定内容和用途
 		linux支持长文件名，标点符号只能用下划线_ 和 . 但最好别用空格 用下划线代替
 
-第四章
+第四章 探究操作系统
 	ls
 		ls
 			直接列出当前目录文件
@@ -178,7 +178,7 @@
 		/var 			除了/tmp 和/home 目录之外，相对来说，目前我们看到的目录是静态的，这是说， 它们的内容不会改变。/var 目录存放的是动态文件。各种数据库，假脱机文件， 用户邮件等等，都位于在这里。
 		/var/log 		这个/var/log 目录包含日志文件、各种系统活动的记录。这些文件非常重要，并且 应该时时监测它们。其中最重要的一个文件是/var/log/messages。注意，为了系统安全，在一些系统中， 你必须是超级用户才能查看这些日志文件。
 
-第五章
+第五章 操作文件和目录
 	命令
 
 	通配符
@@ -266,7 +266,7 @@
 
 			文件管理器  同时按下 Ctrl+Shift 按键会创建一个链接
 
-第六章
+第六章 使用命令
 	什么是命令
 		是一个可执行程序，就像我们所看到的位于目录/usr/bin 中的文件一样。 这一类程序可以是用诸如 C 和 C++语言写成的程序编译的二进制文件, 也可以是由诸如shell，perl，python，ruby等等脚本语言写成的程序 。
 
@@ -349,7 +349,7 @@
 		查看所有别名
 			直接输入alias
 
-第七章
+第七章 重定向
 	标准输入、输出和错误
 		输入输出错误在本质上都是文件
 			标准输入文件 stdin，默认情况下，连接键盘
@@ -447,7 +447,7 @@
 				有没有作用一样
 				在 grep 过滤管道线的内容之前，来捕捉整个目录列表到文件 ls.txt
 
-第八章
+第八章 从shell眼中看世界
 	echo 显示一行文本
 
 	（字符）展开
@@ -572,7 +572,7 @@
 
 		 echo $'\a' 能使用转义字符
 
-第九章
+第九章 键盘高级操作技巧
 	移动光标
 		按键 	行动
 		Ctrl-a 	移动光标到行首。
@@ -637,7 +637,7 @@
 
 		http://en.wikipedia.org/wiki/Computer_terminal
 
-第十章
+第十章 权限
 	传统的unix系统支持多任务也支持多用户系统，这意味着多个用户可以在同一时间使用同一台计算机。
 	除了在本机上直接使用键盘鼠标操控，也可以远程通过ssh（安全的shell）登陆并操作这台电脑。
 
@@ -748,7 +748,7 @@
 		sudo － 以另一个用户身份执行命令
 			sudo 可以使用本用户密码以管理员身份直接执行命令
 
-第十一章
+第十一章 进程
 	进程是怎么工作的
 		系统启动时，会将自己的活动初始化为进程，然后运行init程序（在/etc）。
 		许多系统服务以守护程序进行，守护程序没有用户接口。
@@ -960,7 +960,7 @@
 		xload  	一个图形界面程序，可以画出系统负载随时间变化的图形。
 		tload 	terminal load与 xload 程序相似，但是在终端中画出图形。使用 Ctrl-c，来终止输出。
 
-第十二章
+第十二章 shell环境
 	shell环境储存
 		shell变量
 			bash存放的少量数据
@@ -1027,7 +1027,7 @@
 	激活修改
 		source .bashrc
 		
-第十四章
+第十四章 自定义shell提示符
 	解剖一个提示符
 		Shell 提示符中用到的转义字符
 			序列	显示值
@@ -1106,11 +1106,57 @@
 		保存提示符
 			export PS1
 
+第十五章 软件包管理
+	打包系统
+		Debian .deb
+		RedHat .rpm
+		
+		主要的包管理系统家族
+			包管理系统	          发行版 (部分列表)
+			Debian Style (.deb)	  Debian, Ubuntu, Xandros, Linspire
+			Red Hat Style (.rpm)  Fedora, CentOS, Red Hat Enterprise Linux, OpenSUSE, Mandriva, PCLinuxOS																
 
-																			
-
-							
+	包管理系统是怎样工作的
+		linux中几乎所有软件都可以在互联网上找到
+		大多以包形式提供，剩下以源码形式存在，可以手动安装
+		
+	上层和底层软件包工具
+		发行版	        底层工具	上层工具
+		Debian-Style	dpkg	    apt-get, aptitude
 			
+		查找
+			apt-get update; apt-cache search search_string
+				
+		安装
+			从资源库安装
+				apt-get update; apt-cache search search_string
+			用包文件安装
+				dpkg --install package_file
+		
+		卸载
+			apt-get remove package_name
+		
+		更新
+			通过资源库更新
+				apt-get update; apt-get upgrade
+			通过包文件更新
+				dpkg --install package_file
+		
+		列出所安装的软件包
+			dpkg --list
 			
+		确定是否安装了一个软件包
+			dpkg --install package_file
+		
+		显示所安装软件包的信息
+			dpkg --install package_file
+		
+		查找安装了某个文件的软件包
+			确定哪个软件包对安装的某个特殊文件负责
+				
+第十六章
+	
+		
+		
 			
 			
