@@ -254,7 +254,7 @@ python数据类型
 
 	序列
 		组成
-			元组、列表和字符串
+			元组、列表和字符串，range等
 
 		分片索引
 			string[x:y:z]
@@ -263,8 +263,12 @@ python数据类型
 				其他序列类型都能使用
 				负索引 和正索引的对比
 				负索引 = 正索引-长度
-				0  1  2  3  4
-			   -5 -4 -3 -2 -1
+				index
+					 +---+---+---+---+---+---+
+					 | P | y | t | h | o | n |
+					 +---+---+---+---+---+---+
+					 0   1   2   3   4   5   6
+					-6  -5  -4  -3  -2  -1
 
 		序列的方法
 			转换
@@ -322,8 +326,6 @@ python数据类型
 					format 函数的骚操作
 						>>> "{0:4.2f}".format(a)
 						'0.33'
-					还能这么用
-						format(1,".2f")
 
 			格式化操作符
 				写法  '%d'%(x)
@@ -682,15 +684,15 @@ python数据类型
 			一般创建
 				name = { ’key‘ : value,}用大括号
 
+			key
+				可以是字符串也可以是数字
+
 			特殊创建
 				转换创建
 					dict(映射类型的参数)
 						dict3 = dict((('F',70),('i',105),('s',115),('h',104),('c',67)))
 						c = dict(zip(['one', 'two', 'three'], [1, 2, 3]))
-
-					{}.fromkeys（key[,value]）创建新的字典，值是赋值给所有的key
-						>>> dict1.fromkeys((1,2,3),(2,5,6))
-						{1: (2, 5, 6), 2: (2, 5, 6), 3: (2, 5, 6)}
+						只要是可迭代的满足以上格式的，都可以
 
 				关键字创建
 					dict4 = dict(小甲鱼 = '让编程改变世界',苍井空 = '让AV征服所有宅男')#这里key不能打引号
@@ -924,9 +926,21 @@ python数据类型
 		列表推导式
 			a = [i for i in range(100)if not (i%2) and i%3]
 
+		嵌套列推导式
+			matrix=[
+				[1,2,3,4],
+				[5,6,7,8],
+				[9,10,11,12]
+
+			]
+			c = [[row[i] for row in matrix] for i in range(4)]
+			print(c)
+			[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+
 		字典推导式
 		>>> d = {'a': 1, 'b': 2, 'c': 3}
-		>>> {k:v*v for k, v in d.items()} {'a': 1, 'b': 4, 'c': 9}
+		>>> {k:v*v for k, v in d.items()}
+		{'a': 1, 'b': 4, 'c': 9}
 
 		集合推导式
 			c = {i for i in [1,1,2,3,4,5,5,6,7,8,3,2,1]}
@@ -1469,10 +1483,10 @@ Python的操作符
 		概念
 			只能在函数（father）内部调用内部函数（son）
 				>>> def fun1():
-					print('fun1()正在被调用')
-						def fun2():
-							print('fun2()正在被调用')
-					fun2()
+							print('fun1()正在被调用')
+								def fun2():
+									print('fun2()正在被调用')
+							fun2()
 
 		修改外部函数的局部变量
 			在嵌套的函数中，如果希望在内部函数修改外部函数的局部变量
@@ -1504,8 +1518,6 @@ Python的操作符
 						print('I am inside!')
 
 				inside()
-
-
 
 			应该这样调用
 				def outside():
@@ -1718,103 +1730,15 @@ Python的操作符
 			答：with 语句会自动处理文件的打开和关闭，如果中途出现异常，会执行清理代码，然后确保文件自动关闭
 
 异常检测
-	异常总结
-		网址
-			http://bbs.fishc.c om/forum.php?mod=viewthread&tid=45814&extra=page%3D1%26filter%3Dtypeid%26typeid%3D403
+	try:
+		 raise xxxxxxError(xxx,xxxx)
 
-		AssertionError        	断言语句（assert）失败
-		AttributeError        	尝试访问未知的对象属性
-		EOFError              	用户输入文件末尾标志EOF（Ctrl+d）
-		FloatingPointError    	浮点计算错误
-		GeneratorExit         	generator.close()方法被调用的时候
-		ImportError           	导入模块失败的时候
-		IndexError            	索引超出序列的范围
-		KeyError              	字典中查找一个不存在的关键字
-		KeyboardInterrupt     	用户输入中断键（Ctrl+c）
-		MemoryError           	内存溢出（可通过删除对象释放内存）
-		NameError             	尝试访问一个不存在的变量
-		NotImplementedError   	尚未实现的方法
-		OSError               	操作系统产生的异常（例如打开一个不存在的文件）
-		OverflowError         	数值运算超出最大限制
-		ReferenceError        	弱引用（weak reference）试图访问一个已经被垃圾回收机制回收了的对象
-		RuntimeError          	一般的运行时错误
-		StopIteration         	迭代器没有更多的值
-		SyntaxError           	Python的语法错误
-		IndentationError      	缩进错误
-		TabError              	Tab和空格混合使用
-		SystemError           	Python编译器系统错误
-		SystemExit            	Python编译器进程被关闭
-		TypeError             	不同类型间的无效操作
-		UnboundLocalError     	访问一个未初始化的本地变量（NameError的子类）
-		UnicodeError          	Unicode相关的错误（ValueError的子类）
-		UnicodeEncodeError    	Unicode编码时的错误（UnicodeError的子类）
-		UnicodeDecodeError    	Unicode解码时的错误（UnicodeError的子类）
-		UnicodeTranslateError 	Unicode转换时的错误（UnicodeError的子类）
-		ValueError            	传入无效的参数
-		ZeroDivisionError     	除数为零
-
-	异常分类
-		BaseException
-		+-- SystemExit
-		+-- KeyboardInterrupt
-		+-- GeneratorExit
-		+-- Exception
-			  +-- StopIteration
-			  +-- ArithmeticError
-			  |    +-- FloatingPointError
-			  |    +-- OverflowError
-			  |    +-- ZeroDivisionError
-			  +-- AssertionError
-			  +-- AttributeError
-			  +-- BufferError
-			  +-- EOFError
-			  +-- ImportError
-			  +-- LookupError
-			  |    +-- IndexError
-			  |    +-- KeyError
-			  +-- MemoryError
-			  +-- NameError
-			  |    +-- UnboundLocalError
-			  +-- OSError
-			  |    +-- BlockingIOError
-			  |    +-- ChildProcessError
-			  |    +-- ConnectionError
-			  |    |    +-- BrokenPipeError
-			  |    |    +-- ConnectionAbortedError
-			  |    |    +-- ConnectionRefusedError
-			  |    |    +-- ConnectionResetError
-			  |    +-- FileExistsError
-			  |    +-- FileNotFoundError
-			  |    +-- InterruptedError
-			  |    +-- IsADirectoryError
-			  |    +-- NotADirectoryError
-			  |    +-- PermissionError
-			  |    +-- ProcessLookupError
-			  |    +-- TimeoutError
-			  +-- ReferenceError
-			  +-- RuntimeError
-			  |    +-- NotImplementedError
-			  +-- SyntaxError
-			  |    +-- IndentationError
-			  |         +-- TabError
-			  +-- SystemError
-			  +-- TypeError
-			  +-- ValueError
-			  |    +-- UnicodeError
-			  |         +-- UnicodeDecodeError
-			  |         +-- UnicodeEncodeError
-			  |         +-- UnicodeTranslateError
-			  +-- Warning
-				   +-- DeprecationWarning
-				   +-- PendingDeprecationWarning
-				   +-- RuntimeWarning
-				   +-- SyntaxWarning
-				   +-- UserWarning
-				   +-- FutureWarning
-				   +-- ImportWarning
-				   +-- UnicodeWarning
-				   +-- BytesWarning
-				   +-- ResourceWarning
+	except xxxxxError as error :
+		xxxxxx
+	else:
+		xxxxxxx
+	finally:
+		xxxxxxxxxxx
 
 	语句结构
 		try:
@@ -1992,13 +1916,6 @@ Python的操作符
 					self.add(x)
 
 模块
-	封装
-		容器 对数据的封装
-		函数 对语句的封装
-		类	 方法和属性的封装
-
-		封装就是程序
-
 	命名空间
 		>>> import hello
 		>>> hello.hi()
@@ -2117,6 +2034,19 @@ Python的操作符
 			3 将相关的模块放入文件夹中
 		导入模块
 			当模块导入 名字是包名.模块名 就可以了
+
+		从包中导入*
+			__init__.py 包里含有 __all__ = ["echo", "surround", "reverse"]
+			导入全部会从这里定义的名字导入
+
+		子包参考
+			from . import echo
+			from .. import formats
+			from ..filters import equalizer
+
+			.代表当前模块
+			..代表父模块
+			注意相对导入是基于当前模块导入，如果在__main__中就必须使用绝对导入
 
 	类变量和实例变量
 		继承与同一个类的实例对象会从继承对象那里继承类属性
