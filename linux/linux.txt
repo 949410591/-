@@ -966,9 +966,9 @@
 			bash存放的少量数据
 		别名和shell函数
 		环境变量
-		
+
 	检查环境变量
-		printenv	
+		printenv
 			打印环境变量和shell变量
 				kk@kk-VirtualBox:~$ printenv
 				CLUTTER_IM_MODULE=xim
@@ -980,19 +980,19 @@
 
 		set
 			不带参数会打印环境变量、shell变量和shell函数
-			
+
 		echo
 			echo $[变量名]
 			可以打印变量内容
-		
+
 		alias
 			直接alias可以查看别名
-	
+
 	如何建立shell环境
 		bash启动时会读取一系列的启动文件的配置脚本，这些文件设置了可供所有用户共享的shell环境。
 		然后读取我们自己家目录的启动文件，这个启动文件定义了用户个人的shell环境。
 		确切的启动顺序要依赖运行的shell会话类型。
-		两种：	
+		两种：
 			登录shell会话环境（ctrl + alt + F1~F7 需要输入用户密码）
 				 登录 shell 会话的启动文件（读取顺序也是如此）
 					文件	内容
@@ -1001,14 +1001,14 @@
 					~/.bash_login	如果文件 ~/.bash_profile 没有找到，bash 会尝试读取这个脚本。
 					~/.profile	如果文件 ~/.bash_profile 或文件 ~/.bash_login 都没有找到，
 								bash 会试图读取这个文件。 这是基于 Debian 发行版的默认设置，比方说 Ubuntu。
-							
+
 			非登录shell会话环境（GUI下启动终端出现）
 				非登录 shell 会话的启动文件
 				文件	内容
 				/etc/bash.bashrc	应用于所有用户的全局配置文件。
 				~/.bashrc	用户个人的启动文件。可以用来扩展或重写全局配置脚本中的设置。
-	
-	启动文件的内容	
+
+	启动文件的内容
 		参数覆盖
 			kk@kk-VirtualBox:~$ foo=''This' 'is' 'some''
 			kk@kk-VirtualBox:~$ echo $foo
@@ -1016,17 +1016,17 @@
 			kk@kk-VirtualBox:~$ foo=''$foo' 'text''
 			kk@kk-VirtualBox:~$ echo $foo
 			This is some text
-			
+
 		export PATH
 			告诉shell可以使用PATH变量的内容
-			
+
 	修改shell环境
 		修改哪个文件
 			一般我们只需要对自己家目录下的文件修改，因为不需要为所有用户修改
-			
+
 	激活修改
 		source .bashrc
-		
+
 第十四章 自定义shell提示符
 	解剖一个提示符
 		Shell 提示符中用到的转义字符
@@ -1054,13 +1054,13 @@
 			\$	这会显示一个"$"字符，除非你拥有超级用户权限。在那种情况下， 它会显示一个"#"字符。
 			\[	标志着一系列一个或多个非打印字符的开始。这被用来嵌入非打印 的控制字符，这些字符以某种方式来操作终端仿真器，比方说移动光标或者是更改文本颜色。
 			\]	标志着非打印字符序列结束。
-									
+
 		自定义提示符
 			备份
 				kk@kk-VirtualBox:~$ ps1_old=''$PS1''
 				kk@kk-VirtualBox:~$ echo $ps1_old
 				\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
-				
+
 			定义时用‘’
 				kk@kk-VirtualBox:~$ PS1='\$'
 				$
@@ -1076,7 +1076,7 @@
 					\033[0;35m	粉红	\033[1;35m	浅粉色
 					\033[0;36m	青色	\033[1;36m	浅青色
 					\033[0;37m	浅灰色	\033[1;37m	白色
-					
+
 				<kk@kk-VirtualBox>:~$PS1='\[\033[0;37m\]<\u@\h>:\w\$'
 				<kk@kk-VirtualBox>:~$
 
@@ -1085,10 +1085,10 @@
 					\033[0;41m	红色	\033[1;45m	紫色
 					\033[0;42m	绿色	\033[1;46m	青色
 					\033[0;43m	棕色	\033[1;47m	浅灰色
-					
+
 				<kk@kk-VirtualBox>:~$PS1='\[\033[0;31m\]\[\033[0;40m\]<\u@\h>:\w\$'
 				<kk@kk-VirtualBox>:~$
-				
+
 		移动光标
 			光标移动转义序列
 			转义编码	行动
@@ -1101,8 +1101,8 @@
 			\033[K	清空从光标位置到当前行末的内容。
 			\033[s	存储当前光标位置。
 			\033[u	唤醒之前存储的光标位置。
-			
-			
+
+
 		保存提示符
 			export PS1
 
@@ -1110,53 +1110,50 @@
 	打包系统
 		Debian .deb
 		RedHat .rpm
-		
+
 		主要的包管理系统家族
 			包管理系统	          发行版 (部分列表)
 			Debian Style (.deb)	  Debian, Ubuntu, Xandros, Linspire
-			Red Hat Style (.rpm)  Fedora, CentOS, Red Hat Enterprise Linux, OpenSUSE, Mandriva, PCLinuxOS																
+			Red Hat Style (.rpm)  Fedora, CentOS, Red Hat Enterprise Linux, OpenSUSE, Mandriva, PCLinuxOS
 
 	包管理系统是怎样工作的
 		linux中几乎所有软件都可以在互联网上找到
 		大多以包形式提供，剩下以源码形式存在，可以手动安装
-		
+
 	上层和底层软件包工具
 		发行版	        底层工具	上层工具
 		Debian-Style	dpkg	    apt-get, aptitude
-			
+
 		查找
 			apt-get update; apt-cache search search_string
-				
+
 		安装
 			从资源库安装
 				apt-get update; apt-cache search search_string
 			用包文件安装
 				dpkg --install package_file
-		
+
 		卸载
 			apt-get remove package_name
-		
+
 		更新
 			通过资源库更新
 				apt-get update; apt-get upgrade
 			通过包文件更新
 				dpkg --install package_file
-		
+
 		列出所安装的软件包
 			dpkg --list
-			
+
 		确定是否安装了一个软件包
 			dpkg --install package_file
-		
+
 		显示所安装软件包的信息
 			dpkg --install package_file
-		
+
 		查找安装了某个文件的软件包
 			确定哪个软件包对安装的某个特殊文件负责
-				
+
 第十六章
-	
+	挂载和卸载储存设备
 		
-		
-			
-			
