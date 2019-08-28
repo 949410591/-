@@ -38,10 +38,9 @@ Python的基础
 	脚本文件运行
 		第一行
 			#!/usr/bin/env python3
-			#！这个被称为shebang 这个是告诉shell使用python解释器执行下面的代码
 
-		添加可执行权限：
-			$ chmod +x helloworld.py
+			$ chmod +x helloworld.py--
+			*。3·******************·
 
 		执行脚本文件：
 			$ ./helloworld.py
@@ -1176,7 +1175,8 @@ Python的操作符
 			开始循环体之前先判断是否满足循环条件，满足继续循环，如果不满足跳出循环
 
 		else语句
-			要么怎样，要么不怎么样：if else语句
+			对于if 是不满足if条件才执行，对于while、for和try来说
+			是完整执行完上面的语句才能执行
 
 			while（for） else 语句
 				也就是说必须把循环完整执行完，不然不会执行else , 中途break的话也是不会执行else语句的
@@ -1704,7 +1704,7 @@ Python的操作符
 			'python 面向对象程序语言\n'
 
 		f.readlines()
-			读取所有行文字
+			读取所有行文字，结果是列表，包含所有行的内容
 
 		f.writelines(字符串序列)
 			如果是写入文件一定要确保打开模式是a或者w
