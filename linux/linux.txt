@@ -1156,4 +1156,60 @@
 
 第十六章
 	挂载和卸载储存设备
+		文件 /etc/fstab 可以列出系统启动时要挂载的设备
+			LABEL=/12               /               ext3        defaults        1   1
+			LABEL=/home             /home           ext3        defaults        1   2
+			LABEL=/boot             /boot           ext3        defaults        1   2
+					
+		/etc/fstab 字段
+			字段	内容	说明
+				1	设备名	传统上，这个字段包含与物理设备相关联的设备文件的实际名字，比如说/dev/hda1（第一个 IDE 通道上第一个主设备分区）。然而今天的计算机，有很多热插拔设备（像 USB 驱动设备），许多 现代的 Linux 发行版用一个文本标签和设备相关联。当这个设备连接到系统中时， 这个标签（当储存媒介格式化时，这个标签会被添加到存储媒介中）会被操作系统读取。 那样的话，不管赋给实际物理设备哪个设备文件，这个设备仍然能被系统正确地识别。
+				2	挂载点	设备所连接到的文件系统树的目录。
+				3	文件系统类型	Linux 允许挂载许多文件系统类型。大多数本地的 Linux 文件系统是 ext3， 但是也支持很多其它的，比方说 FAT16 (msdos), FAT32 (vfat)，NTFS (ntfs)，CD-ROM (iso9660)，等等。
+				4	选项	文件系统可以通过各种各样的选项来挂载。有可能，例如，挂载只读的文件系统， 或者挂载阻止执行任何程序的文件系统（一个有用的安全特性，避免删除媒介。）
+				5	频率	一位数字，指定是否和在什么时间用 dump 命令来备份一个文件系统。
+				6	次序	一位数字，指定 fsck 命令按照什么次序来检查文件系统。
+				
+	查看挂载的文件系统列表
+		mount
+			不加参数能直接显示挂载的文件系统列表
+			/dev/sdb on /media/kk/hanhan type fuseblk (rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096,uhelper=udisks2)
+			......
 		
+		挂载
+			su -
+			mkdir /mnt/usbhanhan
+			mount -t fuseblk /dev/sdb /mnt/usbhanhan
+			cd /mnt/usbhanhan
+			ls
+			这个时候/mnt/usbhanhan 显示的是u盘里面的文件
+			
+		卸载
+			如果真正此文件夹访问的话，你直接卸载会显示此设备正忙
+			所以需要推出这个文件夹
+			cd
+			umount /dev/sdb
+		
+		确定设备名称
+			系统命名
+				查看/dev这里都是系统设备
+				ls /dev
+				
+			Linux 存储设备名称
+				模式	    设备
+				/dev/fd*	软盘驱动器
+				/dev/hd*	老系统中的 IDE(PATA)磁盘。典型的主板包含两个 IDE 连接器或者是通道，每个连接器 带有一根缆线，每根缆线上有两个硬盘驱动器连接点。缆线上的第一个驱动器叫做主设备， 第二个叫做从设备。设备名称这样安排，/dev/hda 是指第一通道上的主设备名；/dev/hdb 是第一通道上的从设备名；/dev/hdc 是第二通道上的主设备名，等等。末尾的数字表示 硬盘驱动器上的分区。例如，/dev/hda1是指系统中第一硬盘驱动器上的第一个分区，而 /dev/hda 则是指整个硬盘驱动器。
+				/dev/lp*	打印机
+				/dev/sd*	SCSI 磁盘。在最近的 Linux 系统中，内核把所有类似于磁盘的设备（包括 PATA/SATA 硬盘， 闪存，和 USB 存储设备，比如说可移动的音乐播放器和数码相机）看作 SCSI 磁盘。 剩下的命名系统类似于上述所描述的旧的/dev/hd*命名方案。
+				/dev/sr*	光盘（CD/DVD 读取器和烧写器）
+			
+			如果系统不能自动挂载的话可以查看日志确定
+				tail -f /var/log/syslog
+				可以实时查看文件更新日志，可以确定设备名称
+				确定完名称就可以自己设定挂载点了
+				挂载完成后可以用df来查看
+			
+		创建新的文件系统
+			
+			
+				
