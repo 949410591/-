@@ -1,0 +1,72 @@
+简单句
+  基本句型及补语
+    五种语句
+      S + V + O
+      S + V + C
+      S + V + O + O
+      S + V + O + C
+
+    动词
+      不及物动词
+        能直接和主语构成完整句子的
+      及物动词
+        不能和主语构成完整句子，需要后跟o
+
+    be
+      把主语和后面部分连接起来的叫连缀动词
+
+    判断S+V+C
+      把v换成是不影响原来的意思
+
+    判断S+V+O+C
+      把oc用是连接起来能构成S+V+O的语句的
+
+    补语词类
+      n/adj
+
+    没有补语的be动词
+      be后面没有跟宾语或者补语的，则翻译为存在
+      To be or not to be
+
+    S+V+O+C和S+V+O+O的区别
+      前者oc可以用是连接是等价关系，后者不能用是连接并非等价关系,具体等不等价必须
+      看完整语句的意思
+      John's father gave him a dog S+V+O+O
+      John's father call shim a dog S+V+O+C
+
+  名词组和冠词
+    名词短语
+      限定词 形容词 名词
+      三部分都可以省略
+
+    什么时候不需要限定词
+      a/an 是one的弱化
+
+      名词不需要用一个来表示的（复数），就可以省略an/a
+        Unmarried men are a rare spacies these days
+
+      抽象名词 和 一些物质名词不能用一个来表示
+        honesty   water food
+
+      专有名词和补语的位置
+        专有名词
+          独一无二
+          独一无二的就不需要用一个来表示，如果加了a/an就表示还有另一个
+            a Genghis Khan 就不行
+
+          判断专有名词
+            There are five Sundays this month
+            I have an appointment on Surday
+            前者因为是一个月来看，sunday就不是独一无二的
+            后者是从一个星期来看就是独一无二的
+            所以重点是在什么范围内这个词是否是独立无二
+
+        最难的是补语位置专有名词的判断
+          补语与主/宾语一致时需要当作专有名词
+
+        同位语
+          凡是上下文有明指或者暗指时，也就是有‘那个’的只是功能时，便用定冠词the
+
+        定冠词用法
+          the 是 that/those的弱化结果
+          特指某一个
