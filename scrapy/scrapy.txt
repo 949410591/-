@@ -1,0 +1,28 @@
+tutorial
+  创建scrapy项目
+    scrapy startproject 【project_name]
+
+    spider
+      start_requests
+        url 列表或者生成器都可以使用
+
+      parse(self, response)
+        response 确定是那个页面的内容
+        parse 方法会自动找到新的urls 然后创建相应的requests
+
+  运行爬虫
+    scrapy crawl [spder_name]
+
+  scrapy的运行机制
+    scrapy.Request 返回 response(instantiate) 然后把response 作为参数返回给parse
+
+  处理数据
+    scrapy shell [url]
+      注意url必须用引号包括，不然不会运行
+
+    response.css('title::text')
+      ::text 是指此标签的内容
+    response.css('title::text').getall()
+      getall() 获得所有结果
+    response.css('title::text')[0].get()
+      get() 是获得一个，[num]是指第几个
