@@ -29,4 +29,48 @@ tutorial
     response.css('title::text').re(r'Quotes.*')
       允许在选择器之上允许运行正则表达式
 
-    
+  蜘蛛中提取数据
+    for  quote in response.xpath('//div[@class="quote"]'):
+      yield {
+          'text':quote.xpath('./span/text()').get(),
+          'author':quote.xpath('./span/small/text()').get(),
+          'tags':quote.xpath('./div/a/text()').getall()
+      }
+      返回数据就是使用yield把爬取的数据一个个返回给引擎
+
+  跟随链接
+    1
+      nextpage = response.xpath('...').get()
+      if nextpage != None:
+        nextpage = response.urljion(nextpage)
+        yield scrapy.Request(nextpae, callback=self.parse)
+
+    2
+      nextpage = response.xpath('xxx').get()
+      if nextpage != None:
+        yield response.follow(nextpage, callback=self.parse)
+
+    3
+      a = response.xpath('..').get()
+      if a :
+        yield response.follow(a, callback=self.parse)
+
+  其它例子
+    start_urls = ['http://quotes.toscrape.com/']
+    def parse(self, response):
+    # follow links to author pages
+      for href in response.css('.author + a::attr(href)'):
+        yield response.follow(href, self.parse_author)
+    # follow pagination links
+      for href in response.css('li.next a::attr(href)'):
+        yield response.follow(href, self.parse)
+    def parse_author(self, response):
+      def extract_with_css(query):
+        return response.css(query).get(default='').strip()
+      yield {
+        'name': extract_with_css('h3.author-title::text'),
+        'birthdate': extract_with_css('.author-born-date::text'),
+        'bio':extract_with_css('.author-description::text'),
+      }
+
+    再原始parse进行跟随，然后有些链接把callback设置为parse_author
