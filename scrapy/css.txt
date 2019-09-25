@@ -1,4 +1,5 @@
-﻿元素选择器
+﻿https://www.w3school.com.cn/css/index.asp
+元素选择器
 	只会选择元素进行样式规划
 	
 		h1,h2,h3,h4
