@@ -355,3 +355,32 @@ Java的加载与执行：一个完整的java程序
 		* 一个java语句必须以“;”结束
 		* 方法体中可以编写多条java语句
 		* 主方法是程序的入口，固定写法，SUN规定的。  
+		
+public class 和 class的区别：
+	
+	* 一个java源文件当中可以定义多个class
+
+	* 一个java源文件当中public的class不是必须的
+
+	* 一个class会定义生成一个xxx.class字节码文件
+
+	* 一个java源文件当中定义公开的类的话，只能有一个，并且该类名称必须和java源文件名称一致。
+
+	* 每一个class当中都可以编写main方法，都可以设定程序的入口，想执行B.class中的main方法：java B，
+	想执行X.class当中的main方法：java X
+
+	* 注意：当在命令窗口中执行java Hello，那么要求Hello.class当中必须有主方法。没有主方法会出现运行
+	阶段的错误：
+		D:\course\JavaProjects\02-JavaSE\day02>java Hello
+		错误: 在类 B 中找不到主方法, 请将主方法定义为:
+			public static void main(String[] args)
+
+总结第一章需要掌握的内容：
+	* 理解java的加载与执行
+	* 能够自己搭建java的开发环境
+	* 能够独立编写HelloWorld程序，编译并运行
+	* 掌握环境变量path的原理以及如何配置
+	* 掌握环境变量classpath的原理以及如何配置
+	* java中的注释
+	* public class 和 class 的区别
+	
