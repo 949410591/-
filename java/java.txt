@@ -1,3 +1,5 @@
+第一章
+
 windows操作系统当中常用的DOS命令：
 	* 不使用UI界面，使用DOS命令可以完成所有的操作。
 
@@ -490,7 +492,7 @@ public class 和 class的区别：
 	变量在一行上可以声明多个
 	int a, b, c
 	
-	变量必须先声明才能访问
+	变量必须先声明赋值后才能访问
 		public class IdentifierTest01 
 			{
 				public static void main(String[] args) 
@@ -501,9 +503,9 @@ public class 和 class的区别：
 			}
 		没有赋值直接使用会出现编译报错
 
-		public class IdentifierTest01 //类名，可以改
+		public class IdentifierTest01
 		{
-			public static void main(String[] args) //main方法名 args变量名
+			public static void main(String[] args)
 			{
 
 				int a, b, c = 300;   //这里只有c被赋值了a、b是没有被赋值的
