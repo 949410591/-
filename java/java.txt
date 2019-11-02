@@ -632,7 +632,7 @@ public class 和 class的区别：
 			}
 			static int a= 2;//可以重名，因为不在同一个作用域中
 			public static void other(String[] args)
-			{
+			{ 
 				System.out.println(a);
 
 			}
@@ -668,25 +668,119 @@ public class 和 class的区别：
 			字符用单引号 ‘a’
 		
 		八种基本数据类型占用空间大小是多少
-			基本数据类型		a'a'a占用空间 【单位：字节】
-			byte				1
-			short				2
-			int					4
+			基本数据类型		 占用空间 【单位：字节】	范围
+			byte				1	   		-128 - 127
+			short				2			-32768-32767
+			int				4
 			long				8
 			float				4
 			double				8
-			boolean				1
-			char				2
-		
+			boolean				1			 true,false
+			char				2			 0-65535
+			
+			注意char和short表示的个数是相同的，只不过char没负数所以能表示更大的整数
+
 		字节
 			1 byte = 8 bit
 			1 bit 1/0
 		整数型当中的byte是1字节 8个比特位，它的范围
 			byte类型的最大值是 01111111【1000000（二进制） -1】 = 127【2的七次方减1】，因为最左边是符号位
 			byte类型的最小值是  -128
-			byte取值范围 -128 到 127                        
+			byte取值范围 -128 到 127    ‘
+
+		关于八种基本数据类型的默认值
+			八种基本数据类型的默认值是一切向0看齐
+			byte short int long	0
+			float double		0.0
+			boolean			false[true 1 false 0]
+			char			\u00000
 			
+		成员变量只声明没有赋值，系统会默认赋值【局部变量不会】
+			public class IdentifierTest01 
+			{
+				static byte a;//成员变量
+				static short b;
+				static int c;
+				static long d;
+				static float e;
+				static double f;
+				static boolean g;
+				static char h;
+
+				public static void main(String[] args) 
+				{
+				
+				System.out.println(a);
+				System.out.println(b);
+				System.out.println(c);
+				System.out.println(d);
+				System.out.println(e);
+				System.out.println(f);
+				System.out.println(g);
+				System.out.println(h);
+
+					
+
+				}
+
+
+			}
+
+			结果：
+				0
+				0
+				0
+				0
+				0.0
+				0.0
+				false
+
+	char类型
+		char类型刚好可以存储一个中文
+			public class IdentifierTest01 
+			{
+
+				public static void main(String[] args) 
+				{
+				char a = 'a';
+				char b = '陈';
+				System.out.println(a);
+				System.out.println(b);
+				}
+
+			}
 			
-		
+		字符串型不能存储一个字符型，类型不兼容
+			public class IdentifierTest01 
+				{
+
+					public static void main(String[] args) 
+					{
+					char a = 'a';
+					char b = '陈';
+					char c = "b";
+					System.out.println(a);
+					System.out.println(b);
+					System.out.println(c);
+					}
+
+				}
+
+			编译结果：
+				IdentifierTest01.java:40: 错误: 不兼容的类型: String无法转换为char
+				char c = "b";
+					 ^
+				1 个错误
+
+
+			
+运算符
+	* 算术运算符
+	* 关系运算符
+	* 逻辑运算符
+	* 赋值类运算符
+	* 字符串连接运算符
+	* 三元运算符
+	
 		
 		
