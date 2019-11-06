@@ -440,7 +440,6 @@ public class 和 class的区别：
 		System.out.println(123);
 		System.out.println(123);
 		两条语句里面的字面值是在不同的内存空间
-
 	
 变量
 	什么是变量
@@ -639,7 +638,6 @@ public class 和 class的区别：
 
 		}
 				   
-
 数据类型
 	数据类型的作用
 		数据类型的作用是指导JVM在运行程序的时候给该数据分配多大的内存空间
@@ -772,8 +770,7 @@ public class 和 class的区别：
 					 ^
 				1 个错误
 
-
-			
+		
 运算符
 	* 算术运算符
 	* 关系运算符
