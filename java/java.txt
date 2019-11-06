@@ -669,7 +669,7 @@ public class 和 class的区别：
 			基本数据类型		 占用空间 【单位：字节】	范围
 			byte				1	   		-128 - 127
 			short				2			-32768-32767
-			int				4
+			int					4
 			long				8
 			float				4
 			double				8
@@ -769,8 +769,7 @@ public class 和 class的区别：
 				char c = "b";
 					 ^
 				1 个错误
-
-		
+	
 运算符
 	* 算术运算符
 	* 关系运算符
