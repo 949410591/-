@@ -770,6 +770,96 @@ public class 和 class的区别：
 					 ^
 				1 个错误
 	
+		转义字符
+			\在java语言中具有转义功能
+			
+			System.out.println 输出自带换行，System.out.print输出不带有换行。
+			
+			\t 制表符	就是tab键
+			\n 换行符	就是enter键
+			两者ascII码不一样
+			\\ 	
+			\'
+			\"
+			\uxxxx unicode编码
+			
+			
+			转义字符在特殊字符前，会把特殊字符转换成普通字符
+				System.out.prinln('//');
+					第一个反斜杠把第二个反斜杠转移成普通的反斜杠字符
+				
+				char a = '';
+					在java中是不允许这样编写程序
+				
+				char a = ''';
+				System.out.print(a);
+					第一个单引号和第二个配对，最后一个单引号找不到配对的
+					
+				charf a = '\'';
+				System.out.print(a);
+					反斜杠具有转义功能，将第二个单引号转换成普通的单引号字符
+					
+				char a = '“”';
+				System.out.print(a);
+					编译成功
+					
+				System.out.print("\"\"");
+					这样才能实现打印双引号
+					
+				char m = '\u4e2d';
+					unicode编码
+		
+		char类型的默认值
+			/u0000 代表什么都没有的东西
+			
+	整数型
+		java语言中的整数型字面值被默认当作int类型处理，要让整数型字面值被当作long类型来处理的话需要在
+		整数型字面值后面添加l/L，建议使用大写的L
+		
+		java语言中整数型字面值有三种方式
+			十进制 是一种缺省默认的方式
+			八进制 在编写八进制整数型字面值的时候需要以0开始
+			十六进制 在编写十六进制整数型字面值的时候需要以0x开始
+		
+			int a = 10;
+			int b = 010;
+			int c = 0x10;
+		
+		long类型赋值int类型字面值存在类型转换
+			int类型是小容量
+			long是大容量
+			小容量可以自动转换为大容量
+			成为自动类型转换机制
+			
+			int d = 456;
+			System.out.println(d);
+			
+						
+			long d = 2147483648;
+			System.out.println(d);
+			这个字面值超出int类型的取值范围
+			解决方法
+				
+			long d = 2147483648L;
+			System.out.println(d);
+			
+		
+							
+					
+				
+
+							
+							
+							
+				
+					
+					
+				
+			
+				
+			
+		
+	
 运算符
 	* 算术运算符
 	* 关系运算符
