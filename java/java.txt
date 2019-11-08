@@ -681,6 +681,7 @@ public class 和 class的区别：
 		字节
 			1 byte = 8 bit
 			1 bit 1/0
+            
 		整数型当中的byte是1字节 8个比特位，它的范围
 			byte类型的最大值是 01111111【1000000（二进制） -1】 = 127【2的七次方减1】，因为最左边是符号位
 			byte类型的最小值是  -128
@@ -942,41 +943,271 @@ public class 和 class的区别：
 			}
 			}
 		}
-
-			
-	
-			
-					
-					
-				
-			
-				
-			
-
-				
-									
-					
-				
-
-							
-							
-							
-				
-					
-					
-				
-			
-				
-			
-		
-	
+        
+    基本数据类型之间的互相转换 转换规则
+        1、八种数据类型当中出了布尔类型其它七种之间都可以互相转换
+        2、小容量向大容量转换，称为自动类型转换，容量从小到大
+            byte < short < int < long < float < double
+                    char <
+            注：任何浮点类型不管占用多少个字节，都比整数类型大
+                char和short可表示的种类数量相同，但是char可表示更大的正整数
+        3、从大容量转换为小容量，叫做强制类型转换，需要强制类型转换符，程序才能编译通过，
+           但是在运行阶段可能会损失精度，谨慎使用
+        4、当整数字面值没有超过byte、short、char的取值范围，可以直接赋值给
+            byte、short、char类型的变量
+        5、byte、short、char混合运算的时候，各自先转换成int类型再做运算。
+        6、多种数据类型，先转换为容量最大的类型再做运算
+        注：byte a = (byte)(int)b/3;括号内的优先级高，
+            最后等号右边的编程byte/int 最后是int类型。
+            大容量转换为小容量必须夹强制类型转换符。
+                  
+    分析程序是否编译成功，不要参杂运行阶段
+        public class TestDype{
+            public static void main(String[] args){
+                short a = 1;
+                byte b = 2;
+                short c = a + b ;
+                System.out.println(a);
+                
+            }
+        }
+        分析这个程序，你不需要计算结果，你只需要判断语法是否符合java规范，
+        因为a + b short类型和byte类型相加，所以全部转换为int类型，那么最后
+        short c 就被赋值int类型的数据，int类型转换为short类型需要强制类型转换符
+        	
 运算符
-	* 算术运算符
-	* 关系运算符
-	* 逻辑运算符
-	* 赋值类运算符
-	* 字符串连接运算符
-	* 三元运算符
+    关于运算符优先级
+        一个表达式有优先级，优先级不确定，使用()来提高优先级
+        ()内优先级最高。
+    算术运算符
+        +
+        -
+        *
+        /
+        % 求余【取模】
+        ++ 自加1
+        -- 自减1
+        关于++运算符和--运算符
+            以下程序用++举例，--效果类似
+            public class OperatorTest{
+                public static void main(String[] args){
+                    int y=1;
+                    //++运算符可以出现在变量后面【单目运算符】
+                    y++;
+                    //++运算符可以出现在变量后面【单目运算符】
+                    ++y;
+                    System.out.println(y);
+                }
+            }
+            小结：
+                ++运算符可以出现在变量前后，结果都是对变量进行自加1
+            
+        ++ 出现在变量后
+            规则：先做赋值运算，再对变量进行自加1
+        
+            public class OperatorTest{
+                public static void main(String[] args){
+                    int a = 1;
+                    int b = a ++;
+                    System.out.println(a);
+                    System.out.println(b);
+                }
+            }
+            结果：
+                C:\Users\pipi\Desktop>java OperatorTest.java
+                2
+                1
+                            
+        ++ 出现再变量前
+            规则： 先做自加1，再赋值
+            
+            public class OperatorTest{
+                public static void main(String[] args){
+                    int a = 1;
+                    int b = ++ a;
+                    System.out.println(a);
+                    System.out.println(b);
+                    } 
+                }
+            结果：
+                C:\Users\pipi\Desktop>java OperatorTest.java
+                2
+                2
+                
+        变形
+            public class OperatorTest{
+                public static void main(String[] args){
+                    int a = 1;
+                    int b = a ++;
+                    System.out.println(a ++);
+                    System.out.println(b ++);
+                    } 
+                }
+                
+            结果：
+                C:\Users\pipi\Desktop>java OperatorTest.java
+                2
+                1
+ 
+	关系运算符
+        >
+        >=
+        <
+        <=
+        ==
+        !=
+        
+        =是赋值运算符，==是关系运算符
+        关系运算符的运算结果一定是布尔类型： true/false
+        
+        public class OperatorTest{
+            public static void main(String[] args){
+                int a = 1;
+                int b = 2;
+                System.out.println(a <= b);
+
+                } 
+            }
+        关系运算符计算的ab两个变量的值的大小关系
+
+	逻辑运算符
+        &   与
+        |   或
+        ！  非
+        ^   异或  不同为true，相同为false
+        
+        &&  短路与
+        ||  短路或
+        
+        1、逻辑运算符要求两边的算子是布尔类型，并且逻辑运算符最终运算结果俄式一个布尔类型
+        2、短路与（或）和逻辑与（或）最终的运算结果是相同的，只不过短路与（或）
+            存在短路现象
+        3、什么情况下发生短路现象
+        4、什么情况下用短路与
+            前一个表达式结果为false
+        5、什么情况下用短路或
+            前一个表达式结果为true
+        
+        public class OperatorTest{
+            public static void main(String[] args){
+                int x = 10;
+                int y = 8;
+                System.out.println(x < y & ++x < y);//与操作，会把表达式完整运行
+                System.out.println(x);
+                System.out.println(x < y && ++x < y);//短路与操作，因为x < y已经确定是false所以短路与后面的表达式不会运行
+                System.out.println(x);
+                /*
+                    从某种角度来说短路与更加智能,由于后面的表达式不执行，所以执行效率高
+                    所以这种方式在实际开发中使用较多，但是在某些特殊环境下需要执行后面表达式
+                    这种情况就得使用逻辑与
+                */
+                } 
+            }
+            
+        
+	赋值类运算符
+        两种
+            基本赋值运算符
+                =
+            扩展类赋值运算符
+                +=
+                -=
+                *=
+                /=
+                %=
+                
+        赋值类运算符优先级
+            先执行等号右边的表达式，将执行结果赋值给左边的变量
+            
+        关于拓展类赋值运算符的实际替换
+             public class OperatorTest{
+                public static void main(String[] args){
+                    int a = 1;
+                    byte b = 0;
+                    //b = a + 5;
+                    //b = (byte)(a+55)
+                    b += 5;//这行语句实际上等于(byte)(b+5) 其实并不等于b = b + 5
+                    System.out.println(b);
+                    }   
+                }
+            结论：
+                拓展类赋值运算符不改变结果类型
+                拓展类赋值运算符会自动进行强转
+        
+	字符串连接运算符
+        关于+
+            加法求和
+                +两边的数据是数字，一定进行加法运算
+                
+            字符串的连接运算
+                +两边有一个是字符串，就一定会进行字符串连接运算，且连接运算的结果
+                还是一个字符串类型
+                
+            在表示中出现多个+，在没有添加括号的前提下，
+            遵循自左向右的顺序依次运算
+            
+            
+            public class OperatorTest{
+                public static void main(String[] args){
+                    int a = 10;
+                    int b = 40;
+                    int c = a + b;
+                    System.out.println(10+20);//求和
+                    System.out.println(a + " + " + b + " = " + c);//字符串连接
+                    System.out.println(10 + a + "20");
+                    System.out.println(10 + (a + "20" ));//与上者执行顺序不同执行
+                    } 
+            }    
+        
+        关于String
+            String是java当中提供的字符串类型
+            String.class字节码文件
+            
+            public class OperatorTest{
+                public static void main(String[] args){
+                    int i = 10;
+                    String username = "zhangsan";
+                    System.out.println("success login, welcome " + username + "!!!!!");
+                    } 
+                    
+                }
+            
+               
+	三元运算符/三元运算符/条件运算符
+        语法规则：
+            布尔表达式 ？ 表达式1 ： 表达式2
+        
+        执行原理
+           布尔表达式为ture，把表达式1作为整个表达式的结果。
+           布尔表达式为false，把表达式2作为整个表达式的结果。
+        
+        正确理解执行原理
+           public class OperatorTest{
+                public static void main(String[] args){
+                    //编译错误
+                    //10;
+                    //编译错误
+                    //'男'
+                    //不是一个完整的java语句
+                    
+                    boolean sex = true;
+                    //编译错误
+                    //sex ? '男' : '女';
+                    
+                    char c = sex ? '男' : '女';
+                    System.out.println(c);
+                    
+                    //语法问题，类型不兼容
+                    // char c1 = sex ? "男" : '女';
+                    
+                    //可以执行
+                    System.out.println(sex ? '男' : '女');
+                   
+                    } 
+                    
+                }
+                
+
 	
 		
 		
