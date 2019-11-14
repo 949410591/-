@@ -1219,307 +1219,420 @@ public class 和 class的区别：
         控制循环的语句
             break
             continue
-    
-    if语句
-        if语句的语法结构
-            第一种
-                if(布尔表达式){
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }
-                
-            第二种
-                if(布尔表达式){
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }else{
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }
-            
-            第三种
-                if(布尔表达式){
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }else if(布尔表达式){
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }else if(布尔表达式){
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }
-                
-            第四种
-                if(布尔表达式){
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }else if(布尔表达式){
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }else if(布尔表达式){
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }else{
-                    java语句;
-                    java语句;
-                    java语句;
-                    java语句;
-                    ...
-                }
-                
-        重点：       
-            对于java语句中的if语句来说，只要有一个分支执行，整个if语句全部结束
-        
-        注意：       
-            以上带有else分支，这两种方式可以保证百分百有分支执行
-        
-        可以嵌套
-            所有控制语句可以互相嵌套使用的，只要合理嵌套
-            if(){
-                if(){
-                
-                }
-            }
-            else{
-                if(){
-                
-                }
-                else{
-                
-                }
-            }
-            嵌套使用时，代码格式必须完美【该缩进就得缩进】，使用大括号包围的代码
-            需要缩进
-        
-        if 语句的分支中只有一条java语句，大括号可以省略不写
-            if(布尔语句){
-                一条java语句;
-            }
-            //这种方式不推荐使用，别人这么写我能看懂就行
-            if (布尔语句) 一条java语句；
-
-			//以上两种方式相等，后面加多少java语句都不受if条件影响是否执行
-			if (布尔语句) 
-				一条java语句；
-				一条java语句;//这里这个语句不被if语句影响是否执行
-			if (布尔语句) 
-				一条java语句；一条java语句;//这也是
-			
-
-            
-    接受用户接盘输入
-    
-        public class InputContent{
-          public static void main(String[] args){
-            //第一步创建键盘扫描对象
-            java.util.Scanner s = new java.util.Scanner(System.in);
-            //第二部调用Scanner对象的next方法开始接收键盘输入
-            String input_String = s.next();//接收以字符串形式的文本
-            System.out.print(input_String);
-            int input_Int = s.nextInt();//接收以整数型int的形式的数字
-            System.out.println(input_Int);
-          }
-        }
-
-关于switch语句
-	属于选择结构，也是分支语句
-	语法结构
-		switch(int或String类型的字面值或变量){
-			case int或String类型的字面值或变量:
-			//case后的值和switch括号里面的值去匹配，
-			//如果匹配成功执行case内容
-				java语句;
-				...
-				/*
-					break;没写break会直接执行下一个语句的内容，不管
-					下一个情况条件是否匹配,这种情况叫做case穿透现象。
-				*/
-			case int或String类型的字面值或变量:
-				java语句;
-				...
-				break;//遇到这个整个分支结束
-
-			case int或String类型的字面值或变量:
-				java语句;
-				...
-				break;
-
-			case int或String类型的字面值或变量:
-				java语句;
-				...
-				break;
-			
-			default ://所有数据匹配不上时，执行这个语句内容
-				java语句;
-				...
-
-		}
-		
-	swithc 执行原理
-		switch 小括号里面的数据和case后面的数据匹配
-		匹配成功执行case的内容，自上而下依次匹配
-
-		匹配成功的分支执行，分支中最后有break语句的话，整个switch语句终止
-
-		匹配成功的分支执行，分支中没有break语句的话，直接进入下一个分支（不进行匹配），
-		这种现象被称为case穿透现象【break语句可以避免穿透】
-
-		所有分支没有匹配成功，当有default的语句话，会执行default分支当中的程序
-		 
-		swtich case后面只能是int 或者String（jdk6以上版本）类型的数据，不能是探测其它类型。
-		当然byte、short、chart也可以直接写到switch和case后面，因为他们可以
-		进行自动类型转换，byte、short、char可以自动转换成int类型。
-		
-		case合并
-			int i = 10;
-			switch (i){
-				case 1: case 2: case 3:case 10:
-				//1 2 3 10 都可以匹配，都可以执行这个case里面的内容
-				System.out.prinln("123");
-			}
-
-
-
-关于循环
-	循环结构
-		执行需要重复执行的代码的作用，循环体和计数器相互配合使用
-
-	基本所有编程语言都支持循环包括三种
-		for
-		while
-		do...while
 	
-	for循环
-		语法结构
-			for(初始化表达式; 布尔表达式; 更新表达式){
-				java语句;
-				...
-			}
-	for 循环的执行原理
-		初始化表达式、布尔表达式、更新表达式都不是必须的！
-		但两个分号必须写
-
-		public class Test{
-			public static void main(String[] args){
-				for(;;){
-				System.out.print(123);//会一直执行这个语句
-				}
-			}
-		}
-
-		初始化表达式最先执行，在for循环当中只执行一次
-
-		布尔表达式只能是true/false不能是其他值
-
-		for的执行过程
-			先执行初始化表达式，并且表达式只执行一次
+	选择结构
+		if语句
+			if语句的语法结构
+				第一种
+					if(布尔表达式){
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}
+					
+				第二种
+					if(布尔表达式){
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}else{
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}
+				
+				第三种
+					if(布尔表达式){
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}else if(布尔表达式){
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}else if(布尔表达式){
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}
+					
+				第四种
+					if(布尔表达式){
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}else if(布尔表达式){
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}else if(布尔表达式){
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}else{
+						java语句;
+						java语句;
+						java语句;
+						java语句;
+						...
+					}
+					
+			重点：       
+				对于java语句中的if语句来说，只要有一个分支执行，整个if语句全部结束
 			
-			判断布尔表达式的结果是true/false
-				true
-					执行循环体
-					执行更新表达式
+			注意：       
+				以上带有else分支，这两种方式可以保证百分百有分支执行
+			
+			可以嵌套
+				所有控制语句可以互相嵌套使用的，只要合理嵌套
+				if(){
+					if(){
+					
+					}
+				}
+				else{
+					if(){
+					
+					}
+					else{
+					
+					}
+				}
+				嵌套使用时，代码格式必须完美【该缩进就得缩进】，使用大括号包围的代码
+				需要缩进
+			
+			if 语句的分支中只有一条java语句，大括号可以省略不写
+				if(布尔语句){
+					一条java语句;
+				}
+				//这种方式不推荐使用，别人这么写我能看懂就行
+				if (布尔语句) 一条java语句；
+
+				//以上两种方式相等，后面加多少java语句都不受if条件影响是否执行
+				if (布尔语句) 
+					一条java语句；
+					一条java语句;//这里这个语句不被if语句影响是否执行
+				if (布尔语句) 
+					一条java语句；一条java语句;//这也是
+				
+
+				
+		接受用户接盘输入
+		
+			public class InputContent{
+			public static void main(String[] args){
+				//第一步创建键盘扫描对象
+				java.util.Scanner s = new java.util.Scanner(System.in);
+				//第二部调用Scanner对象的next方法开始接收键盘输入
+				String input_String = s.next();//接收以字符串形式的文本
+				System.out.print(input_String);
+				int input_Int = s.nextInt();//接收以整数型int的形式的数字
+				System.out.println(input_Int);
+			}
+			}
+
+		关于switch语句
+			属于选择结构，也是分支语句
+			语法结构
+				switch(int或String类型的字面值或变量){
+					case int或String类型的字面值或变量:
+					//case后的值和switch括号里面的值去匹配，
+					//如果匹配成功执行case内容
+						java语句;
+						...
+						/*
+							break;没写break会直接执行下一个语句的内容，不管
+							下一个情况条件是否匹配,这种情况叫做case穿透现象。
+						*/
+					case int或String类型的字面值或变量:
+						java语句;
+						...
+						break;//遇到这个整个分支结束
+
+					case int或String类型的字面值或变量:
+						java语句;
+						...
+						break;
+
+					case int或String类型的字面值或变量:
+						java语句;
+						...
+						break;
+					
+					default ://所有数据匹配不上时，执行这个语句内容
+						java语句;
+						...
+
+				}
+				
+			switch 执行原理
+				switch 小括号里面的数据和case后面的数据匹配
+				匹配成功执行case的内容，自上而下依次匹配
+
+				匹配成功的分支执行，分支中最后有break语句的话，整个switch语句终止
+
+				匹配成功的分支执行，分支中没有break语句的话，直接进入下一个分支（不进行匹配），
+				这种现象被称为case穿透现象【break语句可以避免穿透】
+
+				所有分支没有匹配成功，当有default的语句话，会执行default分支当中的程序
+				
+				swtich case后面只能是int 或者String（jdk6以上版本）类型的数据，不能是探测其它类型。
+				当然byte、short、chart也可以直接写到switch和case后面，因为他们可以
+				进行自动类型转换，byte、short、char可以自动转换成int类型。
+				
+				case合并
+					int i = 10;
+					switch (i){
+						case 1: case 2: case 3:case 10:
+						//1 2 3 10 都可以匹配，都可以执行这个case里面的内容
+						System.out.prinln("123");
+					}
+
+
+
+	关于循环
+		循环结构
+			执行需要重复执行的代码的作用，循环体和计数器相互配合使用
+
+		基本所有编程语言都支持循环包括三种
+			for
+			while
+			do...while
+		
+		for循环
+			语法结构
+				for(初始化表达式; 布尔表达式; 更新表达式){
+					java语句;
+					...
+				}
+			for 循环的执行原理
+				初始化表达式、布尔表达式、更新表达式都不是必须的！
+				但两个分号必须写
+
+				public class Test{
+					public static void main(String[] args){
+						for(;;){
+						System.out.print(123);//会一直执行这个语句
+						}
+					}
+				}
+
+				初始化表达式最先执行，在for循环当中只执行一次
+
+				布尔表达式只能是true/false不能是其他值
+
+				for的执行过程
+					先执行初始化表达式，并且表达式只执行一次
+					
 					判断布尔表达式的结果是true/false
 						true
 							执行循环体
 							执行更新表达式
-							判断....
+							判断布尔表达式的结果是true/false
+								true
+									执行循环体
+									执行更新表达式
+									判断....
+								false
+									循环退出
+
 						false
 							循环退出
 
-				false
-					循环退出
+			i 的作用域
+				在for里面定义的i的作用域只在for循环里
+				在for外面定义的i的作用域在main方法里
+				public class Test{
+					public static void main(String[] args){
+						for(int i = 1; i <= 10;i++ ){
 
-	i 的作用域
-		在for里面定义的i的作用域只在for循环里
-		在for外面定义的i的作用域在main方法里
-		public class Test{
-			public static void main(String[] args){
-				for(int i = 1; i <= 10;i++ ){
+						System.out.println(123);
+						}
 
-				System.out.println(123);
+						int i;
+						for(i = 1; i <= 10;i++ ){
+
+						System.out.println(123);
+						}  
+					}
+					}
+
+			for与if嵌套使用
+			for与循环结构嵌套
+			99乘法表
+			10000以内的素数，每八个一行
+
+		关于while循环语句
+			语法结构
+				while(布尔表达式){
+					循环体;
 				}
-
-				int i;
-				for(i = 1; i <= 10;i++ ){
-
-				System.out.println(123);
-				}  
-			}
-			}
-
-	for与if嵌套使用
-	for与循环结构嵌套
-	99乘法表
-	10000以内的素数，每八个一行
-
-关于while循环语句
-	语法结构
-		while(布尔表达式){
-			循环体;
-		}
-			
-	while循环的执行原理
-		先判断布尔表达式的结果：
-			true
-				执行循环体
-				判断布尔表达式的结果：
+					
+			while循环的执行原理
+				先判断布尔表达式的结果：
 					true
-						判断...
-						...
-						
+						执行循环体
+						判断布尔表达式的结果：
+							true
+								判断...
+								...
+								
+							false
+								退出循环体
 					false
-						退出循环体
-			false
-				退出循环	
+						退出循环	
 
-	while循环的循环次数
-		0~N次
-	
-	do...while
-		语法结构
-			do{
-				循环体；
-			}while(布尔表达式);
-		执行原理
-			先执行循环体
-			判断布尔表达式
-				true
-					执行循环体
-					判断...
-						...
-				false
-					退出循环
-		执行次数
-			1~N次
-		注意事项
+			while循环的循环次数
+				0~N次
 			
+		do...while
+			语法结构
+				do{
+					循环体；
+				}while(布尔表达式);
+			执行原理
+				先执行循环体
+				判断布尔表达式
+					true
+						执行循环体
+						判断...
+							...
+					false
+						退出循环
+			执行次数
+				1~N次
+			
+
+
+		控制循环的语句
+			break
+				是java语言的关键字，翻译为中断
+				
+				break;是一个完整的java语句
+
+				break常用于循环语句中，用来终止循环
+
+				终止哪个循环
+					一般情况下break终止的是最近的循环
+						public class Test01{
+							public static void main(String[] args){
+								for(int i = 3; i>0; i--){
+									for(int j = 0; j<10; j++){
+										if (j == 5){
+											break;
+										}
+										System.out.println(j);
+									}
+								}
+								
+							}
+						}
+					
+					指定循环终止
+						指定某个循环可以直接终止该循环
+							取名字 A:循环
+							终止   break A;
+						
+						public class Test01{
+							public static void main(String[] args){
+								A:for(int i = 3; i>0; i--){
+									B:for(int j = 0; j<10; j++){
+										if (j == 5){
+											break A;
+										}
+										System.out.println(j);
+									}
+								}
+								
+							}
+						}
+
+						public class Test01{
+							public static void main(String[] args){
+								int i = 0;
+								int j = 0;
+								A:do{
+									j++;
+								B: do{
+									i++  ;
+									if(i == 5){
+										break A;
+										
+									}
+									System.out.println(i);
+									
+									}while(i<10);
+									System.out.println("++++++++++++++++++++");
+
+								}while(i<10);
+
+							}
+						}
+
+			continue
+				continue;是一个完整的java语句
+
+				主要用于循环中，控制循环
+
+				break和continue的区别
+					break 终止循环
+					continue 终止本次循环，直接进入下一个循环
+							continue后面的语句不执行
+				
+				//输出奇数
+					public class Test01{
+						public static void main(String[] args){ 
+							for(int i = 0; i<100; i++){
+								if(i%2 == 0){
+									continue;
+								}
+								System.out.println(i);
+							}
+
+						}
+					}
+				
+				指定循环continue
+					//break语法一样
+					//当i 为偶数时continue只输出i(奇数)j
+					public class Test01{
+						public static void main(String[] args){ 
+							A:for(int i = 0; i<10; i++){
+								
+								for(int j =0; j<10; j++){
+									if(i%2 == 0){
+										continue A;
+									}
+									System.out.print(i);
+									System.out.println(j);
+								}
+									
+								System.out.println("======================");
+							
+							}
+
+						}
+					}
+
+
 
 
 
