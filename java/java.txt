@@ -1,4 +1,4 @@
-第一章
+第一章 java环境开发
 
 windows操作系统当中常用的DOS命令：
 	* 不使用UI界面，使用DOS命令可以完成所有的操作。
@@ -207,7 +207,7 @@ Java的加载与执行：一个完整的java程序
 
 	* 在HelloWorld.java文件中编写源代码
 
-	* 打开命令窗口，使用javac命令进行编译：
+	* 打开命令窗口，使用javac命令进行编译： 
 		javac 源文件路径
 
 		出现以下错误：
@@ -360,7 +360,10 @@ Java的加载与执行：一个完整的java程序
 		
 public class 和 class的区别：
 	
-	* 一个java源文件当中可以定义多个class
+	* 一个java源文件当中可以定义多个class	
+		class A{}
+		class B{}
+		class C{}
 
 	* 一个java源文件当中public的class不是必须的
 
@@ -473,6 +476,13 @@ public class 和 class的区别：
 	
 	声明和赋值可以放在一起
 		int i = 10;
+
+		int a ,b,c = 2; // 注意这里的a、b 没有赋值
+
+		int a = 2,b,c = 2; // 这里b没有赋值
+		
+		
+		
 	
 	变量赋值后，可以重新赋值，变量的值可变化
 
@@ -815,7 +825,8 @@ public class 和 class的区别：
 			
 	整数型
 		关于整数型字面值
-			java语言中的整数型字面值被默认当作int类型处理，要让整数型字面值被当作long类型来处理的话需要在
+			java语言中的整数型字面值被默认当作int类型处理，要让整数型字面值被当作long类型来处理的话
+			需要在
 			整数型字面值后面添加l/L，建议使用大写的L
 			
 		java语言中整数型字面值有三种方式
@@ -858,7 +869,8 @@ public class 和 class的区别：
 				short d = 32767;// java对byte、short、chart有优待，
 								//如果字面值没有超出范围，不需要加强制类型转换符，可以直接赋值
 				
-				short e = (short)32768;//如果超出范围使用强制类型转换符会导致丢失精度，比如说这个e最后打印显示是-32767
+				short e = (short)32768;//如果超出范围使用强制类型转换符会导致丢失精度，
+				比如说这个e最后打印显示是-32767
 				System.out.println(d);
 				System.out.println(e);
 				
@@ -945,7 +957,7 @@ public class 和 class的区别：
 		}
         
     基本数据类型之间的互相转换 转换规则
-        1、八种数据类型当中出了布尔类型其它七种之间都可以互相转换
+        1、八种数据类型当中除了布尔类型其它七种之间都可以互相转换
         2、小容量向大容量转换，称为自动类型转换，容量从小到大
             byte < short < int < long < float < double
                     char <
