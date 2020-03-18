@@ -380,6 +380,7 @@ public class 和 class的区别：
 		错误: 在类 B 中找不到主方法, 请将主方法定义为:
 			public static void main(String[] args)
 
+
 总结第一章需要掌握的内容：
 	* 理解java的加载与执行
 	* 能够自己搭建java的开发环境
@@ -1246,7 +1247,7 @@ public class 和 class的区别：
 					
 				第二种
 					if(布尔表达式){
-						java语句;
+						java语句; 
 						java语句;
 						java语句;
 						java语句;
@@ -1367,7 +1368,7 @@ public class 和 class的区别：
 				switch(int或String类型的字面值或变量){
 					case int或String类型的字面值或变量:
 					//case后的值和switch括号里面的值去匹配，
-					//如果匹配成功执行case内容
+					//如果匹配成2功执行case内容
 						java语句;
 						...
 						/*
@@ -1643,6 +1644,118 @@ public class 和 class的区别：
 
 						}
 					}
+
+方法
+	方法是什么,有什么用？
+		方法是一段可以重复利用的代码片段
+		方法可以重复使用，定义方法可以重复使用该段代码
+
+		public class Test{
+			public static void main(String[] args){
+				sum_Num(1,2);
+				sum_Num(1,3);
+				sum_Num(1,4);
+				sum_Num(1,5);
+				//一直重复利用，相同功能的程序使用方法是最便捷的
+				
+			}
+			public static int sum_Num(int a, int b){//a和b是局部变量，方法结束后会自动释放内存空间
+				System.out.println(a + "+" + (b + "=") + (a + b));
+				return a+b;    
+			}	
+		}
+
+	main方法和定义的方法
+		main方法是jvm自动调用的，其它自定义的方法必须手动调用，方法不调用是不会自动执行的。
+		同时需要注意的是，方法体的代码是自上而下依次执行的。
+			public class Test{
+				public static void main(String[] args){
+					sum_Num(1,2);//这就是手动调用，没有这个就不会调用
+					sum_Num(1,3);//上行代码执行完才能执行下行代码
+					sum_Num(1,4);
+					sum_Num(1,5);				
+				}
+				public static int sum_Num(int a, int b){
+					System.out.println(a + "+" + (b + "=") + (a + b));
+					return a+b;  
+				}	
+			}
+
+	方法怎么定义，语法机制是什么？
+		[修饰符列表]  返回值类型 方法名(形式参数列表){
+			方法体；
+		}
+		注意：
+			[] 中括号中的内容不是必须的，是可选的。
+			方法体由java语句构成。
+		
+		修饰符列表
+			现在统一写成pulic static 
+
+		什么是返回值
+			返回值是一个方法的执行结果,一般是数据,叫返回值.
+			方法结束后的返回值是给调用者了
+			public class Test{
+				public static void main(String[] args){
+					a();// a方法的返回值最后给了main方法
+				}
+			}
+
+		返回值类型
+			可以是任何java合法数据类型，包括基本数据类型和引用数据类型. 
+
+		void关键字
+		 	方法不返回任何值的时候使用,返回值类型不能空白所以写上void关键字
+
+		return
+			没有void时,必须使用"return 返回值; "这样的语句,返回值的类型和方法定义的类型一致.
+			
+			return代表一个方法的结束
+
+			如果一个方法返回值类型是void,不能使用"return 值;"这样的语句,但是可以写"return ;"s
+				public static void hanhan(){
+					return;
+				}
+
+		方法名
+			方法名需要见名知意
+			符合标识符的命名规则和命名规范就可以
+
+		形式参数列表
+			形参列表中每个参数都是局部变量,方法结束后内存释放, 数量是0到N个.
+
+			形参有多个需要逗号隔开
+			    public static int sum_Num(int a, int b){
+					System.out.println(a + "+" + b + "=" + (a + b));
+					return a+b;  
+				}
+		
+		方法体
+			由java语句构成
+			完成特定功能
+			自上而下依次执行
+			执行时需要数据,数据来源就是形参
+
+		方法调用
+			类名.方法名(实际参数列表);
+
+			实参和形参的类型和个数必须一一对应
+
+
+		
+		
+		
+
+
+
+			
+
+
+
+
+	
+
+
 
 
 
