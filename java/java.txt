@@ -1647,7 +1647,7 @@ public class 和 class的区别：
 
 方法
 	方法是什么,有什么用？
-		方法是一段可以重复利用的代码片段
+		方法是一段实现某些特定功能、可以重复利用的代码片段
 		方法可以重复使用，定义方法可以重复使用该段代码
 
 		public class Test{
@@ -1741,6 +1741,230 @@ public class 和 class的区别：
 
 			实参和形参的类型和个数必须一一对应
 
+		返回值接收 
+			定义相同类型的变量接收
+			也可以不接收
+
+				public class Test{
+					public static void main(String[] args){
+						sum_Num(1,2);//这个是不接收
+						int a = sum_Num(1, 4);这个是接收
+					}
+					public static int sum_Num(int a, int b){
+						System.out.println(a + "+" + (b + "=") + (a + b));
+						return a+b;  
+					}
+
+					public static void hanhan(){
+						return;
+					}
+				}
+		
+		实际参数列表中的自动类型转换
+	
+			public class Test{
+				public static void main(String[] args){
+					sum_Num(1,2);//这个是不接收
+					int a = sum_Num(1, 4);
+					byte b = 10;
+					byte c = 11;
+					a = sum_Num(b,c); 
+					//虽然赋值的不是int类型是byte，但是小容量可以自动转换为大容量，自动类型转换。
+
+	
+				}
+				public static int sum_Num(int a, int b){
+					System.out.println(a + "+" + b + "=" + (a + b));
+					return a+b;  
+				}
+
+				public static void hanhan(){
+					return;
+				}
+			}
+
+		调用方法是时类名什么时候省略
+
+			省略的前提是此方法和你需要调用的方法是否在一个类中，不在同一个类就不能省略，
+			在同一个就可以省略
+			//类1
+			public class Class1{
+				public static void main(String[] args){
+					Class1.p1();
+					Class1.p2();//这个是之前的调用
+					p1();//此方法和需要调用的方法是同一个类可以省略
+					p2();
+					Class2.p1();//方法和不需要调用的方法是不同类的不能省略
+					Class2.p2();
+
+				}
+				public static void p1(){
+					System.out.println("class1 p1");
+				}
+				public static void p2(){
+					System.out.println("class1 p2");
+				}
+			}
+
+			//类2
+			class Class2{
+				public static void p1(){
+					System.out.println("class2 p1");
+				}
+				public static void p2(){
+					System.out.println("class2 p2");
+				}
+			}
+		
+		方法调用方法（不把main方法特殊化）
+			上面代码把调用语句调换顺序,使用方法调用方法，注意方法体自上而下的顺序。
+			Class1.main 调用 Class1.p1
+			Class1.p1 调用 Class1.p2
+			Class1.p2 调用 Class2.p1
+			Class2.p1 调用 Class2.p2
+
+			public class Class1{
+				public static void main(String[] args){
+					p1();//在同一个类，调用Class1.p1。
+				}
+				public static void p1(){
+					System.out.println("class1 p1");
+					p2();//在同一个类，调用Class1.p2。
+				}
+				public static void p2(){
+					System.out.println("class1 p2");
+					Class2.p1();//不在同一个类，调用Class2.p1
+				}
+			}
+
+			class Class2{
+				public static void p1(){
+					System.out.println("class2 p1");
+					p2();//在同一个类，调用Class2.p2。
+				}
+				public static void p2(){
+					System.out.println("class2 p2");
+				}
+			}
+
+		break 和 return 区别
+			break 结束的是一个循环
+			return结束的是一个方法
+
+			public class Class1{
+				public static void main(String[] args){
+					for(int a = 1; a < 10; a++){
+						if(a == 5){
+							break;//结束离它最近的循环
+						}
+						System.out.println(a);
+						
+					}
+					System.out.println("Class1 over");
+				}
+
+			}
+			
+			结果
+				1
+				2
+				3
+				4
+				Class1 over
+			
+			public class Class1{
+				public static void main(String[] args){
+					for(int a = 1; a < 10; a++){
+						if(a == 5){
+							//break;
+							return;
+							/*结束理它最近的方法，
+								后面还有一个"System.out.println("Class1 over");"语句没有机会执行
+							*/
+						}
+						System.out.println(a);
+						
+					}
+					System.out.println("Class1 over");
+				}
+
+			}
+			
+			结果
+				1
+				2
+				3
+				4
+
+		缺少返回语句
+			编译器不执行代码，只判断语法正确与否
+
+			public class Class1{
+				public static void main(String[] args){
+				m();  
+						
+				}
+				public static int m(){
+					boolean flag = true;
+					if (flag){//编译器不执行代码，不知道里面的值
+						return 1;//编译器不确定这个代码一定执行
+					}
+	
+				}	
+			}
+			/*
+				会报错的原因是编译器无法确定是否一定会有一个return返回值，所以需要再加一个return
+				
+			*/
+
+			//return 语句同一个域下面不能再编写代码，编译器会报错
+			
+			public class Class1{
+				public static void main(String[] args){
+				m();  
+						
+				}
+				public static int m(){
+					boolean flag = true;
+					if (flag){//编译器不执行代码，不知道里面的值
+						return 1;
+						//System.out.println(1); 站在编译器的角度，这里的语句一定不执行，编译器会报错
+					}
+					//System.out.println(1);  站在编译器的角度，这里的语句可能执行，不会报错
+
+					return 0;
+					//System.out.println(1);  站在编译器的角度，这里的语句一定不执行，编译器会报错
+				}	
+			}
+
+		使用三目运算符来简化代码
+			public class Class1{
+				public static void main(String[] args){
+				m();  					
+				}
+				public static int m(){
+					boolean flag = true;
+					return flag ? 1: 0;
+				}
+					
+			}
+
+	jvm内存结构
+		看图片
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+		
 
 		
 		
