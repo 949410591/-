@@ -1952,9 +1952,82 @@ public class 和 class的区别：
 	jvm内存结构
 		看图片
 	
-	
+	方法重载
+		什么是方法重载
+			相似方法可以命名相同，然后使用不同类型的形参来区分
+				
+				public class Test{
+					public static void main(String[] arg){
+						System.out.println(sumInt(1,2));
+						System.out.println(sumLong(1,2));
+						//上面是没有使用方法重载机制，这样会使相似功能的方法名增多
+						//完全可以命名相同，然后用形参来区分
+
+						System.out.println(sum(1,2));
+						System.out.println(sum(1L,2L));
+						System.out.println(sum(1L,2));//经过测试是使用形参是long方法
+					}
+					public static int sumInt(int a, int b){
+						return a + b;
+					}
+					public static long sumLong(long a, long b){
+						return a + b;
+					}
+					public static int sum(int a, int b){
+						System.out.println("sum(int a, int b)");
+						return a + b;
+					}
+					public static long sum(long a, long b){
+						System.out.println("sum(long a, long b)");
+
+						return a + b;
+					}
 
 
+				}
+
+		java语言怎么对方法进行区分
+			首先通过方法名区分
+			允许相同的方法名
+			相同方法名通过方法的参数类型来区分
+
+		什么时候代码考虑使用方法重载？
+			在同一个类中，两个方法功能相似可以使用方法重载，这样会使
+			相似方法名字相同，方便记忆使用
+
+		什么时候代码发生方法重载？
+			同一个类
+			方法名相同
+			参数列表不同
+				参数类型不同
+				参数顺序不同
+				参数个数不同
+			
+			只要满足以上三点，就可以认定方法之间发生了重载机制
+
+
+		方法重载和return无关
+			public static int sum(){
+				
+				return 1.0;
+			}
+
+			public static int sum(){
+				
+				return 1;
+			}
+			这同个类的方法不能构成方法重载，只能说方法重复
+
+	方法递归
+		什么是递归
+			方法自己调用自己
+
+		当递归没有结束条件时
+			会出现栈内存溢出错误
+			所以递归需要结束条件
+		
+		
+		
 
 
 
