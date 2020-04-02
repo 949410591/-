@@ -380,7 +380,6 @@ public class 和 class的区别：
 		错误: 在类 B 中找不到主方法, 请将主方法定义为:
 			public static void main(String[] args)
 
-
 总结第一章需要掌握的内容：
 	* 理解java的加载与执行
 	* 能够自己搭建java的开发环境
@@ -705,7 +704,9 @@ public class 和 class的区别：
 			boolean			false[true 1 false 0]
 			char			\u00000
 			
-		成员变量只声明没有赋值，系统会默认赋值【局部变量不会】
+		成员变量只声明没有赋值，系统会默认赋值【局部变量不会】  
+			特别说明
+				引用数据类型会被赋值为null
 			public class IdentifierTest01 
 			{
 				static byte a;//成员变量
@@ -2006,7 +2007,7 @@ public class 和 class的区别：
 			只要满足以上三点，就可以认定方法之间发生了重载机制
 
 
-		方法重载和return无关
+		方法重载和返回值类型无关，和修饰符列表无关
 			public static int sum(){
 				
 				return 1.0;
@@ -2024,10 +2025,672 @@ public class 和 class的区别：
 
 		当递归没有结束条件时
 			会出现栈内存溢出错误
+				原因是一直压栈没有弹栈，栈内存不够
 			所以递归需要结束条件
+
+对象和类
+	面向对象的三大特征
+		封装
+		继承
+		多态
+
+	几个概念
+		类
+			总结的一个模板
+
+		对象
+			实际存在的个体
+
+		实例 
+			对象还有另一个名字叫实例
+
+		实例化
+			通过类这个模板创建对象的过程叫实例化
+
+		抽象
+			多个对象具有的共同特征，进行思考总结抽取共同特征的过程
+
+		
+		类 ---【实例化】---》 对象（实例）
+		对象 --【抽象】---》 类
+
+		类 = 属性 + 方法
+
+		属性来源于： 状态  就是我们的定义的 int a = 1；
+		方法来源于： 动作  就是我们定义的方法 public static void fangfa(){}
+
+	类的定义
+		怎么定义一个类，语法格式是什么
+			[修饰符列表] class 类名 {
+				//类体 = 属性+方法
+				//属性在代码上以变量的形式存在（描述状态）
+				//方法描述行为
+
+			}
+
+	为什么属性是以变量的形式存在？
+		是因为属性对应的是数据，数据用变量存储
+
+	对象的创建
+		语法
+			new 类名();
+			new是个运算符，用于创建对象we
+
+			类名 变量名 = new 类名();
+				public class Test{
+					public static void main(String[] args){
+						Student student1 = new Student();//student1 这种保存对象内存地址的叫做引用
+						// 前后的类名是相同的
+						// Student 是变量student1的数据类型（引用数据类型）
+						// java 中类都是引用数据类型
+						// new Student();   这是个对象
+
+					}  
+				}
+				class Student{
+					int num;we
+					boolean sex;
+					String name;//引用数据类型在没有赋值时，系统会自动赋值null
+
+				}
+
+	实例变量
+		对象被称为实例，实例变量就是对象级别的变量
+
+		public class A{
+			double height;//这就是实例变量
+			//这种变量被称为对象级别的变量，属于实例变量
+		}
+
+	引用
+		public class Test{
+			public static void main(String[] args){
+				Student student1 = new Student();//student1 这种保存对象内存地址的叫做引用
+			}  
+		}
+		class Student{
+			int num;
+			boolean sex;
+			String name;//引用数据类型在没有赋值时，系统会自动赋值null
+
+		}
+	
+	对象和引用的区别
+		对象是通过 new出来的，在堆内存存储
+		引用是：但凡是变量，且这个变量中保存了对象的内存地址的（看图片）
+	
+	怎么访问实例变量
+		引用.实例变量名
+			public class Test{
+				public static void main(String[] args){
+					Student student1 = new Student();
+					System.out.println(student1.sex);//这个student1.sex就是访问实例变量
+				}  
+			}
+
+	改变实例变量的数据
+		重新赋值就可以了
+
+		public class Test{
+			public static void main(String[] args){
+				Student student1 = new Student();
+				System.out.println(student1.sex);//这个student1.sex就是访问实例变量
+				student1.sex = ture;
+				student1.num = 1111;//重新赋值就行
+			}  
+		}
+
+	内存图
+		不填写代码，只要数据
+		根据程序执行顺序来画图
+
+	空指针异常
+		“空引用”访问实例【对象】相关的数据时会出现空指针异常
+
+	什么时候会被gc回收
+		java中的gc主要针对堆内存中的数据
+		没有任何引用指向该对象的时候
+
+	方法在调用的时候参数如何传递？
+		只是把“值”传递过去，可能是数字，可能是对象的内存地址
+
+	java变量赋值的原理是什么
+		永远是把值复制过去，引用里面的值是对象内存地址
+
+	构造方法
+		什么是构造方法，有什么用?
+			通过构造方法可以完成对象的创建，以及实例变量的初始化，
+			换句话来说：构造方法是用来创建对象，并且
+			同时给对象的属性赋值
+		
+		缺省构造器
+			当一个一个类没有提供一个构造方法，
+			系统会自动提供一个无参数的构造方法，
+			这个方法被称为缺省构造器
+
+			当一个类中有构造方法时，系统不会再提供
+		
+		调用构造方法怎么调用
+			使用new  来调用构造方法
+
+			语法是
+				new 构造方法名(实际参数列表)
+
+		构造方法的语法结构
+			[修饰符列表] 构造方法名（形式参数列表）{
+				构造方法体；
+				//构造方法体中通常给属性赋值，完成属性的初始化
+			}
+
+			注意：
+				修饰符列表必须是 public ，不要写public static，以后解释
+
+				构造方法名和类名一致
+
+				构造方法不需要指定返回类型，也不能写void，写上void就是普通方法，就不是构造方法
+
+				建议写上无参构造方法，比较保险
+
+			public class User{
+				int id ;
+				String username ;
+
+				
+				public User(){
+					//虽然这里什么都没有写，但是实际上有两行代码
+					// id = 0；
+					// username = “”；
+				}
+				public User(int idNum, String usernameString){
+					id = idNum;
+					username = usernameString;
+				}
+				
+				public User(){}
+
+		构造方法支持方法重载
+			
+			public class User{
+				int id ;
+				String username;
+				Address addr;
+
+				public User(){
+					
+				}
+				public User(int idNume, String usernameString){
+					id = idNume;
+					username = usernameString;
+				}
+				/*
+				public User(int id, String username){
+					id = id;
+					username = username;
+					//直接这样不能正确赋值
+				}*/
+			}
+
+		实例变量没有手动赋值的时候，实际上系统会默认赋值，
+		但是这个默认赋值操作实在什么时间进行的？
+		是在类加载的时候给这些实例变量赋值吗？
+			不是，实例变量时在构造方法执行的过程中完成赋值的，创建对象的时候
+
+	封装
+		什么是封装？ 有什么用？
+			封装的作用
+				保证内部结构安全
+				屏蔽复杂，暴露简单
+			
+			代码级别上的封装
+				当一个类当中的数据，假设封装后，对于调用人员来说不需要关心如何实现，
+				只需要通过见的入口来访问就行了
+				另外，类体中安全级别较高的数据封装起来，外部人员不能随意访问，
+				来保证数据的安全性
+	
+		代码实现封装
+			首先 使用private 修饰属性
+			其次 提供入口来访问修改属性
+
+				public class Person{
+					private int age;
+					public  int getAge(){
+						return age;
+					}
+					public  void setAge(int ageNum){
+						age = ageNum;
+					}
+					
+				}
+
+				public class Test_Private{
+					public static void main(String[] args){
+						Person p1 = new Person();
+						System.out.println(p1.getAge());
+						p1.setAge(123);
+						System.out.println(p1.getAge());
+							
+					}
+				}
+
+			接口规范写法
+				规范编写代码，你好我也好
+				get
+					public 返回值类型 get+属性名字(){
+						return xxxx;
+					}
+				set
+					public 返回值类型 set+属性名字(一个参数){
+						xxx = 一个参数；
+					}
+	
+		带有static的方法和不带static的方法怎么调用？
+			带static，如之前所学，直接 类名.方法名  同一类可以省略
+			不带有static 的方法被称为实例方法，实例方法必须先实例化对象后，使用 引用.方法名()来访问
+
+				public class Static{
+					publi static void main(String[] args){
+						Static.a();
+						a();
+						//这是之前学的
+						
+						Static s = new Static();
+						s.b();//实例方法只能通过先实例化对象后使用 引用.方法名()来调用
+						new Static().b(); //这个视频没有解释，是以python学到的来尝试，可以使用
+
+					}
+					public static void a(){
+						System.out.println("a");
+					}
+					public  void b(){
+						//这种不带static被称为实例方法（对象方法，对象级别的方法）
+						//
+						System.out.println("b");
+
+					}
+				}
+					
+		实例对象里的实例变量和实例方法
+			实例变量和实例方法必须实例化对象后直接 引用.变量名或者 引用.方法名()来调用
+
+		实例方法导致的空指针异常
+			和实例变量类似，都是空引用调用对象相关的方法时出现的错误
+			
+			其实空引用调用对象相关的数据时就会发生空指针异常，这里的相关的数据包括
+			实例变量和实例方法
+			    
+				public class Test{
+					public static void main(String[] args){        
+						User u1 = new User();
+						u1 = null;//空引用了
+						u1.a();//出现空指针引用
+						
+
+					}
+				}
+
+				public class User{
+					int id ;
+					String username ;
+
+
+					
+					public void a(){
+
+					}
+					
+				}
+									
+	static关键字
+		翻译成静态的
+		所有static关键字都是用来修饰类相关的，类级别的
+		所有static修饰的，都是采用"类名."的方式来访问的
+		static修饰的变量是静态变量
+		static修饰的方法是静态方法
+
+	变量的分类
+		局部变量：方法体内的
+		成员变量：类体内方法体外的
+
+		成员变量又可以分为
+			实例变量
+			静态变量	
+
+
+		public class Test{
+			int a ;//实例变量
+			static int b;//静态变量
+			public void c(){}//实例方法
+			public static void d{}//静态方法
+			public static void main(String[] args){        
+
+			}
+		}
+	
+	什么时候变量声明为实例的什么时候是静态的？
+		当这个变量不是具体某个对象的属性，而是整个类的属性时就可以直接定义为静态变量
+		简单来说就是这个类每个对象这个属性都是一样的就是静态变量
+		这个类每个对象这个属性不一定相同的就是实例变量
+
+		public class Chinese{
+			
+			String id;
+			String xinming;//姓名数据实例级别的属性
+			static String guoji = "zhonguo";//国籍属于类级别的特征
+			//静态变量再类加载时初始化不需要new对象，直接就有默认值，存储在方法区
+			public Chinese( String id, String xinming){
+				
+				this.id = id;
+				this.xinming = xinming;
+			}
+
+		}
+
+		public class Test{
+
+			public static void main(String[] args){    
+				Chinese c1 = new Chinese("123","lisi ");
+				Chinese c2 = new Chinese("456","zhangsan");
+				System.out.println(c1.id);
+				System.out.println(c1.xinming);
+				System.out.println(Chinese.guoji);//你可以这样直接访问
+				System.out.println(c1.guoji);//也可以引用.访问
+				System.out.println(c2.id);
+				System.out.println(c2.xinming);
+				System.out.println(Chinese.guoji);
+				System.out.println(c1.guoji);
+
+
+
+			}
+		}
+
+	静态变量加载时间
+		当方法区加载类时，发现静态变量会直接加载在方法区里
+
+	空引用访问静态不会空指针异常
+		明确一点是静态变量可以通过引用访问，但是不建议，因为会让人误以为这是实例变量
+
+		还有一点是，如果把引用赋值为空时，再访问静态变量，会访问成功。
+		但这个实际上是“类名.”来访问的
+
+		public class Test{
+			public static void main(String[] args){    
+				Chinese c1 = new Chinese("123","lisi ");
+				Chinese c2 = new Chinese("456","zhangsan");
+				System.out.println(c1.id);
+				System.out.println(c1.xinming);
+				System.out.println("类名.访问静态变量："+Chinese.guoji);//你可以这样直接访问
+
+				System.out.println("引用访问静态变量："+c1.guoji);//也可以引用.访问
+				c1 = null;
+				System.out.println("赋值为null："+c1.guoji);//也可以引用.访问,但实际上是类名.访问的
+			}
+		}
+
+		public class Chinese{
+    
+			String id;
+			String xinming;//姓名数据实例级别的属性
+			static String guoji = "zhonguo";//国籍属于类级别的特征
+			//静态变量再类加载时初始化不需要new对象，直接就有默认值，存储在方法区
+			public Chinese( String id, String xinming){
+				
+				this.id = id;
+				this.xinming = xinming;
+			}
+
+		}
+
+		结果：
+			123
+			lisi
+			类名.访问静态变量：zhonguo
+			引用访问静态变量：zhonguo
+			赋值为null：zhonguo
+
+	
+		和静态量类似，也可以用"引用."来访问，但是不推荐，会让人以为是实例方法
+		还有就是不会出现空指针异常
+
+			public class Test{
+
+				public static void main(String[] args){    
+					Chinese c1 = new Chinese("123","lisi ");
+					Chinese c2 = new Chinese("456","zhangsan");
+					c1.a(); // 不推荐使用这种方式访问静态方法，会被人误以为是实例方法
+					c1.b(); //通常实例方法的访问方式
+					Chinese.a();//通常静态方法的访问方式
+					c1 = null;
+					c1.a();//不会出现空指针 异常，最终执行时会变为Chinese.a();这个代码
+				}
+			}
+
+			public class Chinese{
+    
+				String id;
+				String xinming;//姓名数据实例级别的属性
+				static String guoji = "zhonguo";//国籍属于类级别的特征
+				//静态变量再类加载时初始化不需要new对象，直接就有默认值，存储在方法区
+				public Chinese( String id, String xinming){
+					
+					this.id = id;
+					this.xinming = xinming;
+				}
+				public static void a(){
+					System.out.println("a");
+				}
+				
+				public void b(){
+					System.out.println("b");
+				}
+
+			}
+
+	什么定义为实例方法，什么时候定义为静态方法？
+		当这个方法体中访问了实例变量那么它一定是实例方法
+		工具类一般是静态方法，因为可以直接使用 "类名."访问
+
+	静态代码块
+		使用static 关键字可以定义：静态代码块
+		什么是静态代码块，语法是什么
+			static{
+				java语句；
+				java语句；
+			}
+
+		static静态代码块再什么时候执行?执行特点
+			类加载时执行，只执行一次，
+			并且在main方法执行前执行，
+			按照自上而下顺序执行。
+
+			public class Static{
+				static {
+					System.out.println("A");				
+				}
+				public static void main(String[] args){
+
+					System.out.println("main");
+
+				}
+				static {
+					System.out.println("B");
+					
+				}
+				static {
+					System.out.println("C");
+				}
+
+			}
+			
+			结果
+				A
+				B
+				C
+				main
+
+		静态代码块有什么作用？
+			不常用，不是每个类都要写
+			这是sun公司给程序员提供的时机，叫类加载时机
+
+	jvm内存的总结		
+		堆
+			方法只要执行，就会压栈（局部变量）
+		栈
+			new出来的对象都在堆中，垃圾回收器主要针对（实例变量）
+		方法区
+			类的信息，字节码信息，代码片段（静态变量）
+
+		方法的代码片段放在方法区，但是方法执行过程中需要的内存在栈中
+	
+	实例语句块
+		语法
+			{
+				java语句；
+				java语句；
+			}
+		
+		特点
+			类加载不执行
+			在构造方法执行前执行
+			这也是sun公司给程序员提供的特殊时机，对象构建时机
+				public class Test{
+
+					public static void main(String[] args){    
+						System.out.println("main方法");
+						new Test();
+						new Test();
+						new Test(123);
+						new Test(123);
+
+					}
+
+					{//实例语句块1
+						System.out.println("实例语句块begin1");
+
+
+					}
+					public  Test(){
+						System.out.println("无参构造");
+					}
+					public Test(int i){
+						System.out.println("有参构造");
+					}
+					{//实例语句块2
+						System.out.println("实例语句块begin2");
+						//这个实例语句块，虽然在构造方法后面，但是执行比它们先
+
+
+					}
+				}
+
+				结果
+					main方法
+					实例语句块begin1
+					实例语句块begin2
+					无参构造
+					实例语句块begin1
+					实例语句块begin2
+					无参构造
+					实例语句块begin1
+					实例语句块begin2
+					有参构造	
+
+	程序执行小例子
+		public class Test{
+			static {
+				System.out.println("A");
+			}
+			public static void main(String[] args){    
+				System.out.println("Y");
+				new Test();
+				System.out.println("Z");
+
+			}
+
+
+			public  Test(){
+				System.out.println("B");
+				
+			}
+
+			{//实例语句块
+				
+				System.out.println("C");
+
+			}
+			static {
+				System.out.println("x");
+			}
+		}
+		
+		结果
+			A
+			x
+			Y
+			C
+			b
+			Z
+
+	this
+		一个关键字，全部小写
+
+		是什么？内存细节
+			一个对象一个this
+
+			this是一个变量，是一个引用。 this保存当前对象的内存地址，指向自身。
+			this存储在堆内存当中对象的内部
+
+			只能使用在实例方法中，
+			哪个对象调用实例方法，
+			this就是指向它，
+			this代表当前对象
+
+		this 大部分情况是可以省略的
+
+		为什么this不能使用在静态方法中？
+			this代表当前对象，静态方法中不存在当前对象
+
+
+
+
+
+
+
+
+	
+
+
+			
+
+
+
+
+		
+
+		
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
 		
 		
 		
+
+
+
+
+
+
 
 
 
