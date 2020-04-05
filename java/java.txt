@@ -403,14 +403,14 @@ public class 和 class的区别：
 			常量名
 			。。。
 
-	标识符的命名规则 【不按照这个规则编译器会报错】
+	标识符的命名规则 【不按照这个规则编译器会报错】（背）
 		一个合法的标识符只能由数字、字母、下划线、美元符号组成
 		不能以数字开头
 		严格区分大小写
 		关键字不能做标识符
 		理论上无长度限制
 
-	标识符命名规范 【只是一种规范，不属于语法，不遵守编译器不会报错】
+	标识符命名规范 【只是一种规范，不属于语法，不遵守编译器不会报错】（背）
 		最好见名知意
 		遵守驼峰命名方式
 			SystemService
@@ -958,7 +958,7 @@ public class 和 class的区别：
 			}
 		}
         
-    基本数据类型之间的互相转换 转换规则
+    基本数据类型之间的互相转换 转换规则（背）
         1、八种数据类型当中除了布尔类型其它七种之间都可以互相转换
         2、小容量向大容量转换，称为自动类型转换，容量从小到大
             byte < short < int < long < float < double
@@ -1996,7 +1996,7 @@ public class 和 class的区别：
 			在同一个类中，两个方法功能相似可以使用方法重载，这样会使
 			相似方法名字相同，方便记忆使用
 
-		什么时候代码发生方法重载？
+		什么时候代码发生方法重载？（背）
 			同一个类
 			方法名相同
 			参数列表不同
@@ -2005,7 +2005,6 @@ public class 和 class的区别：
 				参数个数不同
 			
 			只要满足以上三点，就可以认定方法之间发生了重载机制
-
 
 		方法重载和返回值类型无关，和修饰符列表无关
 			public static int sum(){
@@ -2532,7 +2531,7 @@ public class 和 class的区别：
 			不常用，不是每个类都要写
 			这是sun公司给程序员提供的时机，叫类加载时机
 
-	jvm内存的总结		
+	jvm内存的总结	（背）	
 		堆
 			方法只要执行，就会压栈（局部变量）
 		栈
@@ -2666,9 +2665,9 @@ public class 和 class的区别：
 		为什么this不能使用在静态方法中？
 			this代表当前对象，静态方法中不存在当前对象
 
-		this什么时候不能省略
+		this什么时候不能省略（背）
 			在构造方法或者实例方法中，发生局部变量名和实例变量名相同时，不能省略，必须写
-			不然jvm只会就近原则认为是形式参数
+			不然jvm只会遵循就近原则
 
 			public class Test{
 
@@ -2877,11 +2876,12 @@ public class 和 class的区别：
 	方法覆盖
 		什么是方法覆盖	
 			别称：方法重写
+
 		什么时候使用方法覆盖
 			子类继承父类后，继承过来的方法不能满足子类的业务需求
 			子类有权对该方法进行重新编写，有必要进行“方法覆盖”
 
-		什么时候构成代码覆盖
+		什么时候构成代码覆盖（背）
 			两个类必须有继承关系
 			
 			重写之后的方法相同的返回值类型、方法名、参数列表
@@ -2892,8 +2892,435 @@ public class 和 class的区别：
 			重写之后的方法不能比之前的代码抛出更多的异常
 			
 
+		注意事项（背）
+			1	方法覆盖只针对方法，和属性无关
+			2	私有方法无法覆盖
+			3	构造方法不能被继承，所以无法覆盖
+			4	方法覆盖只是针对实例方法，静态方法覆盖没有意义
+			5	写方法覆盖的时候，把父类的方法复制粘贴，这样避免出错
 
-	多态
+		方法覆盖案例
+			public class Test{
+				public static void main(String[] args){
+					/*
+					Chinese c = new Chinese("韩寒");
+					American a = new American("jeak");
+					以上的错误原因是因为，我在下面Chinese和American类是
+					继承People类，但是没有继承构造方法。
+					我也没有写构造方法，所以不能使用有参数的构造方法
+					*/
+
+					Chinese c = new Chinese();
+					American a = new American();
+					c.setName("瀚瀚");
+					a.setName("jack");
+					c.speak();
+					a.speak();
+					/*
+						这里直接使用系统默认给的无参数构造方法
+						使用setName方法赋值name属性，所以是可以的。
+					*/
+
+				}
+			}
+
+			class People{
+				private String name;
+				public People(){}
+				public People(String name){
+					this.name = name;
+				}
+				public void setName(String name){
+					this.name = name;
+				}
+				public String getName(){
+					return this.name;
+				}
+				public void speak(){
+					System.out.println(name + "....");
+				}
+
+			}
+
+			class Chinese extends People{
+				public void speak(){//父类方法复制粘贴！！！！！！！！！！！！
+					System.out.println(this.getName()+ " 说中国话");
+					//这里是方法覆盖，把speak方法重写
+				}
+			}
+
+
+			class American extends People{
+				public void speak(){//父类方法复制粘贴！！！！！！！！！！！！
+					System.out.println(this.getName()+ " speak english");
+					//这里是方法覆盖，把speak方法重写
+				}
+			}
+
+	多态	
+		基础语法
+			学习多态之前，先学习两个概念
+				第一个
+					向上转型：
+						子转父(自动类型转换)
+				第二个
+					向下转型：
+						父转子（强制类型转换，需要加强制类型转换符）
+				注意
+					java支持向下向上转型，无论是哪一种，
+					
+					两种类型之间必须有继承关系，否则编译器报错。
+
+					自转和强转只是方便了理解的类比，但是实际工作中不能这样说，要专业
+					说也只能说向上向下转型。
+
+				例子
+					public class Test{
+						public static void main(String[] args){						
+							//向上转型
+							People p1 = new Chinese();
+							People p2 = new American();
+							p1.speak();
+							p2.speak();
+							/*  
+								运行结果：
+									null 说中国话
+									null speak english
+
+								什么是多态？
+									多种形态，多种状态
+
+								分析p1.speak();
+									编译阶段
+										对于编译器来说，编译器只知道p1的类型是Peopel，
+										所以检查语法的时候，会去people.class 找speak()方法
+										找到了绑定上speak（）
+										编译通过，静态绑定成功。（编译阶段属于静态绑定）
+									运行阶段
+										运行的时候，实际上堆内存里面的对象是Chinese，
+										所以在speak的时候，真正参与的speak的对象是Chinese
+										所以运行阶段会动态执行Chinese对象的speak（）方法
+										这个过程属于运行阶段绑定（运行阶段绑定属于动态绑定）
+									
+									多态表示多种形态
+										编译的时候一种形态
+										运行的时候另一种形态
+							*/
+							
+
+						}
+					}
+
+					class People{
+						private String name;
+						public People(){}
+						public People(String name){
+							this.name = name;
+						}
+						public void setName(String name){
+							this.name = name;
+						}
+						public String getName(){
+							return this.name;
+						}
+						public void speak(){
+							System.out.println(name + "....");
+						}
+
+
+					}
+
+					class Chinese extends People{
+						public void speak(){
+							System.out.println(this.getName()+ " 说中国话");
+						}
+					}
+
+
+					class American extends People{
+						public void speak(){
+							System.out.println(this.getName()+ " speak english");
+						}
+					}
+
+			多态实际意义
+				父类型指向子类型对象
+				包括编译阶段和运行阶段
+				编译阶段：绑定父类方法
+				运行阶段：绑定子类型方法
+				多种形态
+
+			什么时候使用向下转型
+				如果你想访问方法是子类特有的，父类没有的时候
+
+				public class Test{
+					public static void main(String[] args){
+				
+						//向上转型
+						People p1 = new Chinese();
+						People p2 = new American();
+						p1.speak();
+						p2.speak();
+						//p1.gongfu();
+						//不能编译通过，编译阶段静态绑定只会找People类里面的gongfu方法
+						//但是People没有这个方法所以不能编译
+
+						//如果我非要调用怎么办？
+						//必须使用强制类型转换了
+						Chinese a = (Chinese)p1;
+						a.gongfu();
+						//这时候因为有继承关系，可以使用强制类型转换
+
+
+						
+
+					}
+				}
+
+				class People{
+					private String name;
+					public People(){}
+					public People(String name){
+						this.name = name;
+					}
+					public void setName(String name){
+						this.name = name;
+					}
+					public String getName(){
+						return this.name;
+					}
+					public void speak(){
+						System.out.println(name + "....");
+					}
+
+
+				}
+
+				class Chinese extends People{
+					public void speak(){
+						System.out.println(this.getName()+ " 说中国话");
+					}
+					public void gongfu(){
+						System.out.println("我会功夫");
+					}
+				}
+
+
+				class American extends People{
+					public void speak(){
+						System.out.println(this.getName()+ " speak english");
+					}
+				}
+
+			向下转型的风险
+				类型转换错误
+				public class Test{
+					public static void main(String[] args){
+				
+						//向上转型
+						People p1 = new American();
+						Chinese a1 = (Chinese)p1;
+						a1.gongfu();
+
+						/*
+							编译阶段，首先new出来的p1对象编译器认为是People类型
+							然后People和Chinese是有继承关系的
+							可以强制类型转换
+							然后就能找到gongfu这个方法
+
+							但是
+							运行阶段
+							看的是实际上堆内存里面实际的对象是哪个
+							运行阶段p1实际上是American类和Chinese类是没有继承关系的
+							强制类型转换会失败
+						*/
+
+
+					}
+				}
+
+				class People{
+					private String name;
+					public People(){}
+					public People(String name){
+						this.name = name;
+					}
+					public void setName(String name){
+						this.name = name;
+					}
+					public String getName(){
+						return this.name;
+					}
+					public void speak(){
+						System.out.println(name + "....");
+					}
+
+
+				}
+
+				class Chinese extends People{
+					public void speak(){
+						System.out.println(this.getName()+ " 说中国话");
+					}
+					public void gongfu(){
+						System.out.println("我会功夫");
+					}
+				}
+
+
+				class American extends People{
+					public void speak(){
+						System.out.println(this.getName()+ " speak english");
+					}
+				}
+
+			如何避免？ instanceof（背）
+				instanceof
+					1 可以在运行阶段动态判断引用指向的对象类型
+					2 语法
+						（引用 instanceof 类型）
+					3 instanceof运算符的运算结果只能是： true/false
+					4 	c是引用，c变量保存了内存地址指向堆中的对象
+						假设(c instance of Chinese) 为true表示什么？
+							c引用指向堆内存的对象是Chinese
+						假设(c instance of Chinese) 为false表示什么？
+							c引用指向堆内存的对象不是Chinese
+					5 程序员在使用向下转型的时候，需要使用instanceof来判断，这是个好习惯
+
+					public class Test{
+						public static void main(String[] args){
+					
+							//向上转型
+							
+							People p1 = new American();
+
+							//解决方法
+							if(p1 instanceof Chinese){
+								Chinese a1 = (Chinese)p1;
+								a1.gongfu();
+							}
+							else{
+								System.out.println("不是Chinese类型");
+							}
+
+
+							
+
+
+						}
+					}
+
+					class People{
+						private String name;
+						public People(){}
+						public People(String name){
+							this.name = name;
+						}
+						public void setName(String name){
+							this.name = name;
+						}
+						public String getName(){
+							return this.name;
+						}
+						public void speak(){
+							System.out.println(name + "....");
+						}
+
+
+					}
+
+					class Chinese extends People{
+						public void speak(){
+							System.out.println(this.getName()+ " 说中国话");
+						}
+						public void gongfu(){
+							System.out.println("我会功夫");
+						}
+					}
+
+
+					class American extends People{
+						public void speak(){
+							System.out.println(this.getName()+ " speak english");
+						}
+					}
+
+			为什么使用instnaceof？
+				public class Test{
+					public static void main(String[] args){
+				
+						//向上转型
+						People p1 = new American();//American可能是程序员A写的
+						People p2 = new Chinese();//Chinese可能是程序员B写的
+						testInstanceof(p1);
+						testInstanceof(p2);
+					
+					}
+					public static void testInstanceof(People p1){//这个可能是程序员C写的
+						if(p1 instanceof Chinese){
+							Chinese c1 = (Chinese)p1;
+							c1.gongfu();
+						}
+						else if(p1 instanceof American){
+							American a1 = (American)p1;
+							a1.singEnglishSong();
+
+					
+						//以上的我们可以通过肉眼观察到
+						//但是如果上面说的类型是别人写的，你就不可能知道这个类型的具体内容
+						//所以避免出现问题需要使用instanceof方法
+						
+						}
+
+					
+
+
+					
+
+
+					}
+				}
+
+				class People{
+					private String name;
+					public People(){}
+					public People(String name){
+						this.name = name;
+					}
+					public void setName(String name){
+						this.name = name;
+					}
+					public String getName(){
+						return this.name;
+					}
+					public void speak(){
+						System.out.println(name + "....");
+					}
+
+
+				}
+
+				class Chinese extends People{
+					public void speak(){
+						System.out.println(this.getName()+ " 说中国话");
+					}
+					public void gongfu(){
+						System.out.println("我会功夫");
+					}
+				}
+
+
+				class American extends People{
+					public void speak(){
+						System.out.println(this.getName()+ " speak english");
+					}
+
+					public void singEnglishSong(){
+						System.out.println("Sing english song");
+					}
+				}
+
+		开发中的作用
 
 
 
