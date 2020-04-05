@@ -2891,12 +2891,70 @@ public class 和 class的区别：
 				
 			重写之后的方法不能比之前的代码抛出更多的异常
 			
-
 		注意事项（背）
 			1	方法覆盖只针对方法，和属性无关
 			2	私有方法无法覆盖
+				public class Test{
+					public static void main(String[] args){
+						Test b = new B();
+						b.a();
+
+						/*
+							结果：
+								Test的a
+
+							结论：
+								私有方法没有方法覆盖
+						*/   
+					}
+					private  void a(){
+						System.out.println("Test的a");
+					}
+				}
+
+
+				class B extends Test{
+					public  void a(){
+						System.out.println("B的a");
+
+					}
+				}
+    
 			3	构造方法不能被继承，所以无法覆盖
 			4	方法覆盖只是针对实例方法，静态方法覆盖没有意义
+				public class Test{
+					public static void main(String[] args){
+						A b = new B();
+						b.a();//虽然实际上是B类但是会调用A类的静态方法
+						B c = new B();
+						c.a();//只有B类才能调用B类的方法
+						/*
+						结果：
+							A的a
+							B的a
+
+						结论：
+							虽然能实现方法覆盖
+							但是没有意义，所以静态方法不存在方法覆盖
+						*/   
+					}
+				}
+
+
+				class A{
+					public static void a(){
+						System.out.println("A的a");
+
+					}
+				}
+
+				class B extends A{
+					public static void a(){
+						System.out.println("B的a");
+
+					}
+				}
+					
 			5	写方法覆盖的时候，把父类的方法复制粘贴，这样避免出错
 
 		方法覆盖案例
@@ -3320,8 +3378,36 @@ public class 和 class的区别：
 					}
 				}
 
-		开发中的作用
+		开发中的作用	
+			面向父类编程，不面向具体子类编程，这样的扩展性能最好
 
+			降低程序的耦合度，提高程序的拓展力
+
+			public class Master {
+				/*
+				public void feed(Dog d){}
+				public void feed(Cat c){}
+				这样的程序太过具体，以后要拓展其它宠物类不好拓展
+				*/
+				public void feed(Pet p1){//这样子对父类Pet编程，就算以后再添加其它宠物也是可以使用的
+			
+					p1.eat();
+					
+			
+				}
+			}
+		
+		关于开发的几个原则
+			ocp
+				对拓展开放，对修改关闭
+				这样降低程序的耦合度，提高程序的拓展力
+
+			面向抽象编程，不建议面向具体编程
+
+	super
+			
+
+				
 
 
 
