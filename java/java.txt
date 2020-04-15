@@ -3540,8 +3540,181 @@ java语言基础
 				this指向一个内存地址，super不是
 				super只是指向对象父类型的特征
 				
+	final关键字
+		特点
+			关键字
+		
+			表示最终的不可变的
+		
+			可以修饰变量以及方法，还有类等
+
+		修饰变量
+			修饰的变量只能赋一次值
+				public class Test{
+					public static void main(String[] args) {
+						final int a = 1;
+						a = 2;
+
+					}
+				}
+				结果：
+					Error:(4, 9) java: 无法为最终变量a分配值
+			
+			修饰引用会怎么样
+				其实是一样的也无法重新赋值内存地址
+
+				该引用只能指向该对象，并且它只能永远指向该对象
+
+				但是该对象内部的数据可以被修改
+
+					public class Test{
+						public static void main(String[] args) {
+							final A a = new A();
+							a = new A();
+
+						}
+					}
+					class A{ }
 
 
+					结果：
+						Error:(4, 9) java: 无法为最终变量a分配值
+
+			修饰实例变量
+				系统不管赋默认值，要求程序员手动赋值，要求程序员必须手动赋值
+				这个手动赋值，在变量后面赋值还是在构造方法中赋值。
+
+				public class Test{
+					public static void main(String[] args) {
+						final A a = new A();
+
+
+					}
+				}
+
+				class A{
+					//public final int a;
+					//public final int a = 1; 在变量后面直接赋值
+					/*
+					public final int a;
+					public A(){
+						this.a = 1; 在构造方法中赋值
+					}
+					*/
+				}
+
+				结果：
+					Error:(10, 22) java: 变量 a 未在默认构造器中初始化
+
+	
+		修饰方法
+			修饰的方法无法被覆盖
+
+				class A{
+					public final void a(){
+
+					}
+
+				}
+
+				class B extends A{
+					public void a(){
+
+					}
+
+				}
+
+				结果：
+					Error:(15, 17) java: B中的a()无法覆盖A中的a()
+  					被覆盖的方法为final
+
+
+
+
+
+		修饰类
+			修饰的类无法继承
+				public final Test{
+					public static void main(String[] args) {
+
+					}
+				}
+
+				final class A{
+
+				}
+
+		常量
+			static final 修饰的变量称为常量，常量全部大写，和静态方法一样存储在方法区，
+			在类加载时初始化
+			区别在于
+			常量不能变。
+			常量一般是公开的
+
+			class A{
+				public static final A_A = 1;
+			}
+
+	抽象类
+		什么是抽象类
+			类和类之间具有共同特征，将这些共同特征提取出来，就是抽象类
+			这种类本身是不存在的，所以抽象类无法创建对象，无法实例化
+
+		抽象类属于什么类型
+			抽象类也属于引用数据类型
+
+		抽象类怎么定义
+			[修饰符列表] abstract class 类名{
+				类体；
+			}
+
+		抽象类无法实例化，所以只能用于继承
+			abstract class Account{
+
+			}
+
+			class CrediAccoune extends Account{}
+
+		final 和 abstract 不能联合使用，这两个是对立的
+			final abstract class Account{
+
+			}
+
+			abstract class CrediAccoune extends Account{}
+
+		结果：
+			Error:(12, 16) java: 非法的修饰符组合: abstract和final
+			Error:(16, 37) java: 无法从最终Account进行继承
+
+		抽象类的子类可以是抽象类（老千层饼？）
+			
+			abstract class Account{
+
+			}
+
+			abstract class CrediAccoune extends Account{}
+
+		抽象类有构造方法，是用于子类初始化父类特征（super（））
+
+		抽象方法
+			什么是抽象方法
+				没有实现的方法，没有方法体的方法	
+				public abstract void dosome();
+				
+			特点
+				没有方法体，以分号结尾
+				前面修饰符列表有abstract
+		
+			抽象类中不一定有抽象方法，抽象方法必须出现在抽象类中
+
+	
+	接口
+
+	抽象类和接口的区别
+
+package和import
+
+访问控制权限
 
 
 
