@@ -1,0 +1,229 @@
+<Project>
+  <Name>无标题</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>无标题</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Interface">
+        <Name>Itrable</Name>
+        <Access>Public</Access>
+        <Location left="746" top="153" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Iterator Iterator()</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>Collection</Name>
+        <Access>Public</Access>
+        <Location left="769" top="561" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Class">
+        <Name>Iterator&lt;E&gt;</Name>
+        <Access>Public</Access>
+        <Location left="398" top="545" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public Boolean hasNext()</Member>
+        <Member type="Method">public E next()</Member>
+        <Member type="Method">public void remove()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>集合的迭代器对象
+</Text>
+        <Location left="398" top="459" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>继承关系
+泛化关系
+is a</Text>
+        <Location left="844" top="417" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>可迭代的，可遍历的，所有集合元素都是可迭代的可遍历的
+遍历就是一个一个拿出来</Text>
+        <Location left="917" top="152" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>关联关系
+Collection有Iterator方法，会返回Iterator对象
+has a
+</Text>
+        <Location left="594" top="561" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>继承Itrable的含义是，所有集合都是迭代的
+</Text>
+        <Location left="950" top="578" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Interface">
+        <Name>Set</Name>
+        <Access>Public</Access>
+        <Location left="1171" top="869" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Interface">
+        <Name>List</Name>
+        <Access>Public</Access>
+        <Location left="398" top="869" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Comment">
+        <Text>List集合存储元素的特点：
+有序可重复，存储的元素有下标
+实际上说的是存进去是这个顺序，取出来还是这个顺序。这里的顺序不是说按照大小关系排序的，指的是进去什么顺序出来什么顺序。
+有序是因为List集合都有下标，下标从0开始以1递增。</Text>
+        <Location left="178" top="869" />
+        <Size width="204" height="196" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>Set集合存储元素的特点：
+无序不可重复；
+无序表示进去这个顺序，出来不一定这个顺序。另外set集合中元素没有下标，Set集合中的元素还不能重复。
+</Text>
+        <Location left="1349" top="869" />
+        <Size width="160" height="209" />
+      </Entity>
+      <Entity type="Class">
+        <Name>ArrayList</Name>
+        <Access>Public</Access>
+        <Location left="157" top="1198" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>LinkedList</Name>
+        <Access>Public</Access>
+        <Location left="398" top="1198" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Vector</Name>
+        <Access>Public</Access>
+        <Location left="658" top="1198" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>实现关系，like a</Text>
+        <Location left="413" top="1109" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>集合底层采用数组这种数据结构，非线程安全。</Text>
+        <Location left="157" top="1425" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>底层采用了双向链表的数据结构</Text>
+        <Location left="398" top="1425" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>底层采用数组这种数据结构，线程安全的。
+所有的方法都有synchronized修饰，但是效率低，现在保证线程安全有别的方案，现在使用较少</Text>
+        <Location left="658" top="1425" />
+        <Size width="162" height="119" />
+      </Entity>
+      <Entity type="Class">
+        <Name>HashSet</Name>
+        <Access>Public</Access>
+        <Location left="978" top="1181" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Treeset</Name>
+        <Access>Public</Access>
+        <Location left="1365" top="1516" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>new的时候实际上new了一个HashMap集合，向HashSet中存储元素实际上是向HashMap中存储元素，HashMap实际上是一个哈希表的数据结构。</Text>
+        <Location left="978" top="1425" />
+        <Size width="164" height="119" />
+      </Entity>
+      <Entity type="Interface">
+        <Name>SortedSet</Name>
+        <Access>Public</Access>
+        <Location left="1365" top="1181" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Comment">
+        <Text>new 的时候底层实际上new TreeMap，向TreeSet放数据的时候，实际上是向TreeMap中放数据。
+TreeMap采用了二叉树数据结构</Text>
+        <Location left="1365" top="1745" />
+        <Size width="162" height="145" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>继承Set首先是无序不可重复的，但是SortedSet集合中的元素可以自动排序。
+我们称为可排序集合，放到这个集合中的元素是自动按照大小顺序排序的。</Text>
+        <Location left="1548" top="1181" />
+        <Size width="159" height="119" />
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="1" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="1" second="2">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="9" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="12" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="13" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="14" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="19" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="22" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="20" second="22">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

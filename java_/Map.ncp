@@ -1,0 +1,112 @@
+<Project>
+  <Name>无标题</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>无标题</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Interface">
+        <Name>Map</Name>
+        <Access>Public</Access>
+        <Location left="410" top="215" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Comment">
+        <Text>Map集合和Collection没有关系
+Map集合以Key和Value这种键值对的方式存储
+Key和Value都是存储java对象的内存地址
+所有Map集合的Key是无序不可重复的
+Map集合的Key和Set集合存储元素特点相同
+</Text>
+        <Location left="596" top="240" />
+        <Size width="275" height="120" />
+      </Entity>
+      <Entity type="Class">
+        <Name>HashMap</Name>
+        <Access>Public</Access>
+        <Location left="52" top="576" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Hashtable</Name>
+        <Access>Public</Access>
+        <Location left="410" top="576" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>底层是Hash表的数据结构，线程安全，里面的方法都带有Synchronized关键字，效率低，现在使用少，因为控制线程安全有其它更好的方案</Text>
+        <Location left="410" top="811" />
+        <Size width="187" height="92" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>底层是Hash表的数据结构</Text>
+        <Location left="52" top="811" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Interface">
+        <Name>SortedMap</Name>
+        <Access>Public</Access>
+        <Location left="688" top="576" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Class">
+        <Name>TreeMap</Name>
+        <Access>Public</Access>
+        <Location left="688" top="985" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Proerties</Name>
+        <Access>Public</Access>
+        <Location left="410" top="985" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>集合的Key存储元素的特点：首先是无序不可重复的，另外放在SortedMap集合Kye部分的元素会自动按照大小顺序排列，称为可排序的集合</Text>
+        <Location left="865" top="632" />
+        <Size width="241" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>底层的数据结构是二叉树</Text>
+        <Location left="688" top="1230" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>是线程安全的，因为继承Hashtable，另外存储元素的时候也是采用Key和Value的形式存储，并且Key和Value只支持stringle类型，不支持其它类型</Text>
+        <Location left="410" top="1230" />
+        <Size width="156" height="110" />
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Realization" first="2" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="3" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="7" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
