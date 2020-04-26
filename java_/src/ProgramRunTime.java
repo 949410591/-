@@ -10,5 +10,6 @@ public class ProgramRunTime {
         }
         long endTime = System.currentTimeMillis();
         System.out.println((endTime-startTime)+"ms");
+
     }
 }

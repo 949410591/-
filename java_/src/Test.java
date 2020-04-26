@@ -1,4 +1,9 @@
-package PACKAGE_NAME;
+import java.text.CollationElementIterator;
+import java.util.*;
+import java.util.zip.CheckedOutputStream;
 
-public class Test {
+public class Test <E>{
+
+
+
 }
