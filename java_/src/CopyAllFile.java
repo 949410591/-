@@ -8,12 +8,15 @@ import java.util.Date;
 public class CopyAllFile {
     public static void main(String[] args) {
         String sourcePath = "E:\\下载\\play";
-        String margetPath = "E:\\下载\\play2";
+        String margetPath = "D:\\hanhan";
         copyAllFile(sourcePath,margetPath);
-        //copyAllFile(margetPath,sourcePath);
+
 
         //删除所有文件
-        //rdAllFile(margetPath);
+
+        rdAllFile(margetPath);
+
+        //
 
 
 
@@ -62,14 +65,16 @@ public class CopyAllFile {
 
     //复制所有文件
     public static void copyAllFile(String sourcePath,String margetPath){
-
-
+        margetPath = margetPath+"\\"+sourcePath.substring(3);
         File margetFile = new File(margetPath);
         if(!margetFile.exists()){
 
-            margetFile.mkdir();
+            margetFile.mkdirs();
 
         }
+
+
+
         findAllFile(sourcePath,margetPath);
 
 
@@ -125,12 +130,14 @@ public class CopyAllFile {
                 //是文件就复制
                 if(file.isFile()){
 
-
+                    //System.out.println(file.getAbsolutePath()+"-->"+margetPath+"\\"+file.getName());
                     log(file.getAbsolutePath(),margetPath+"\\"+file.getName());
                 }
                 //是目录就调用findAllFile继续查找
                 else if(file.isDirectory()){
                     margetPath = margetPath+"\\"+file.getName();
+
+
                     File midFile = new File(margetPath);
                     if(!midFile.exists()){
                         midFile.mkdir();
@@ -138,6 +145,7 @@ public class CopyAllFile {
                     findAllFile(file.getAbsolutePath(),margetPath);
                 }
             }
+
         }
 
     }
