@@ -11,8 +11,6 @@ public class TestThread {
         for (int i = 0; i < 100; i++) {
             System.out.println("主线程支线程输出："+i);
 
-
-
         }
         System.out.println("========================");
         System.out.println("执行start方法开启分支线程");
