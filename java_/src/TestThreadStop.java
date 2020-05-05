@@ -1,44 +1,64 @@
 public class TestThreadStop {
-    public static void main(String[] args) {
-        TestClass t = new TestClass();
 
-        Thread t1 = new Thread(t);
+//    public static void main(String[] args) {
+//        TestClass t = new TestClass();
+//
+//        Thread t1 = new Thread(t);
+//
+//        t1.start();
+//        for (int i = 0; i < 5; i++) {
+//            try {
+//                Thread.sleep(1000);
+//                System.out.println(Thread.currentThread().getName() + " " + i);
+//
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//        }
+//        t.flag = false;
+//
+//    }
+//
 
-        t1.start();
-        for (int i = 0; i <5 ; i++) {
-            try {
-                Thread.sleep(1000);
-                System.out.println(Thread.currentThread().getName()+" "+i);
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+public static void main(String[] args) {
+    TestClass tc = new TestClass();
 
 
+
+    Thread t1 = new Thread(tc);
+    t1.setName("t1");
+    t1.start();
+    for (int i = 0; i <100; i++) {
+        if(i == 5){
+            tc.run = false;
         }
-        t.flag = false;
+        System.out.println(Thread.currentThread().getName()+
+                "：" +
+                i);
+
+    }
+
 
     }
 
 
 }
+
 class TestClass implements Runnable{
-    boolean flag = true;
+    boolean run = true;
+
+
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName()+" "+"begin");
-
-        for (int i = 0; i <1000 ; i++) {
-            if(flag){
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        for (int i = 0; i <100; i++) {
+            if(run){
+                System.out.println(Thread.currentThread().getName()+
+                        "：" +
+                        i);
             }
             else{
-                System.out.println(Thread.currentThread().getName()+" "+"end");
-
                 return;
             }
 
@@ -46,5 +66,30 @@ class TestClass implements Runnable{
 
     }
 }
+//
+//class TestClass implements Runnable{
+//    boolean flag = true;
+//    @Override
+//    public void run() {
+//        System.out.println(Thread.currentThread().getName()+" "+"begin");
+//
+//        for (int i = 0; i <1000 ; i++) {
+//            if(flag){
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            else{
+//                System.out.println(Thread.currentThread().getName()+" "+"end");
+//
+//                return;
+//            }
+//
+//        }
+//
+//    }
+//}
 
 

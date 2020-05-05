@@ -27,7 +27,7 @@ public class TestFile {
 
 
 
-        File f3 = new File("F:\\read\\java_\\Test");
+        File f3 = new File("F:\\read\\java_\\Test007");
         if(!f3.exists()){
             f3.mkdir();
 
