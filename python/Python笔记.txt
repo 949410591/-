@@ -39,7 +39,7 @@ Python的基础
 		第一行
 			#!/usr/bin/env python3
 
-			$ chmod +x helloworld.py--
+			$ chmod +x helloworld.py
 			*。3·******************·
 
 		执行脚本文件：
@@ -124,7 +124,7 @@ python数据类型
 			以这个为例，在a不断被赋值的时候前一个对象因为没有另外的变量引用，
 			所以python会直接回收对象的空间。
 			主要是对象有个头部信息是引用计数器（另一个是类型标志符），
-			当引用计数器为0时会直接回收。
+			当引用计数器为0时会直接回收l。
 
 			可以参考模块gc
 
@@ -139,8 +139,8 @@ python数据类型
 
 				python变量的命名是支持中文命名哦，因为默认使用UEF-8编码
 
-				相同数据结构可以直接赋值
-					(role,line_spoken) = each_line.split(':',1) #split(分隔符，分割几次)
+			相同数据结构可以直接赋值
+				(role,line_spoken) = each_line.split(':',1) #split(分隔符，分割几次)
 
 			多个变量赋值
 				a = b = c = 1
@@ -150,10 +150,10 @@ python数据类型
 				假设有 x = 1，y = 2，z = 3，请问如何快速将三个变量的值互相交换？
 					x, y, z = z, y, x
 
-	查看类型
-		两个函数
-			type(变量名) 直接反馈类型
-			isinstance(变量名，类型) 判断是否是你输入的类型
+		查看类型
+			两个函数
+				type(变量名) 直接反馈类型
+				isinstance(变量名，类型) 判断是否是你输入的类型
 
 	number（数字）
 		类型
@@ -816,110 +816,6 @@ python数据类型
 			>>> dict1
 			{'a': 1, 1: 2, 3: 4}
 
-	迭代器
-		函数实现
-			iter()
-				生成迭代器
-				__iter__(self)
-			next()
-				返回迭代对象
-				__next__()
-			>>> string = "asdfsdfsdf"
-			>>> it = iter(string)
-			>>> next(it)
-			'a'
-			>>> next(it)
-			's'
-			>>> next(it)
-			'd'
-			>>> next(it)
-			'f'
-			>>> next(it)
-			's'
-			>>> next(it)
-			'd'
-			>>> next(it)
-			'f'
-			>>> next(it)
-			's'
-			>>> next(it)
-			'd'
-			>>> next(it)
-			'f'
-			>>> next(it)
-			Traceback (most recent call last):
-			  File "<pyshell#12>", line 1, in <module>
-				next(it)
-			StopIteration
-
-		魔法方法实现
-				>>> class Test:
-				... 	def __init__(self, a, b):
-				... 		self.a = a
-				... 		self.b = b
-				... 	def __iter__(self):
-				... 		return self
-				... 	def __next__(self):
-				... 		self.a += 1
-				... 		if self.a > self.b:
-				... 			raise StopIteration()
-				... 		return self.a
-				... >>> test = Test(0, 5) # Test 类的实例就是迭代器
-				>>> next(test)
-				1
-				>>> next(test)
-				2
-
-
-
-		斐波那契数列
-			>>> class Fibs:
-				def __init__(self, n = 10):
-					self.a = 0
-					self.b = 1
-					self.n = n
-				def __iter__(self):
-					return self
-				def __next__(self):
-					self.a,self.b = self.b ,self.a + self.b
-					if self.a > self.n:
-						raise StopIteration
-					return self.a
-
-
-			>>> a = Fibs()
-			>>> for each in a:
-				print(each)
-
-
-			1
-			1
-			2
-			3
-			5
-			8
-
-		生成器
-			生成器也是一种迭代器
-				这玩意是可以用for 来迭代的，每次迭代的值就是yield 返回的值
-
-			协同程序就是可以运行的独立函数调用，函数可以暂停或者挂起，并在需要的时候从程序离开或者重新开始
-			yield 相当于函数的return 语句，但是普通函数一返回这个函数就结束，生成器不会，只会返回yield后的值再暂停！
-				>>> def myGen():
-					print("生成器被执行！")
-					yield 1
-					yield 2
-				>>> a = myGen()
-				>>> next(a)
-				生成器被执行！
-				1
-				>>> next(a)
-				2
-				>>> next(a)
-				Traceback (most recent call last):
-				  File "<pyshell#9>", line 1, in <module>
-					next(a)
-				StopIteration
 
 	各种推导式
 		列表推导式
@@ -1391,7 +1287,6 @@ Python的操作符
 
 		[1]
 		[1, 2]
-
 
 	函数文档
 			设置
@@ -2414,6 +2309,111 @@ Python的操作符
 				>>> cat.age # 获得属性值 3
 
 魔法方法
+	迭代器
+		函数实现
+			iter()
+				生成迭代器
+				__iter__(self)
+			next()
+				返回迭代对象
+				__next__()
+			>>> string = "asdfsdfsdf"
+			>>> it = iter(string)
+			>>> next(it)
+			'a'
+			>>> next(it)
+			's'
+			>>> next(it)
+			'd'
+			>>> next(it)
+			'f'
+			>>> next(it)
+			's'
+			>>> next(it)
+			'd'
+			>>> next(it)
+			'f'
+			>>> next(it)
+			's'
+			>>> next(it)
+			'd'
+			>>> next(it)
+			'f'
+			>>> next(it)
+			Traceback (most recent call last):
+			  File "<pyshell#12>", line 1, in <module>
+				next(it)
+			StopIteration
+
+		魔法方法实现
+				>>> class Test:
+				... 	def __init__(self, a, b):
+				... 		self.a = a
+				... 		self.b = b
+				... 	def __iter__(self):
+				... 		return self
+				... 	def __next__(self):
+				... 		self.a += 1
+				... 		if self.a > self.b:
+				... 			raise StopIteration()
+				... 		return self.a
+				... >>> test = Test(0, 5) # Test 类的实例就是迭代器
+				>>> next(test)
+				1
+				>>> next(test)
+				2
+
+
+
+		斐波那契数列
+			>>> class Fibs:
+				def __init__(self, n = 10):
+					self.a = 0
+					self.b = 1
+					self.n = n
+				def __iter__(self):
+					return self
+				def __next__(self):
+					self.a,self.b = self.b ,self.a + self.b
+					if self.a > self.n:
+						raise StopIteration
+					return self.a
+
+
+			>>> a = Fibs()
+			>>> for each in a:
+				print(each)
+
+
+			1
+			1
+			2
+			3
+			5
+			8
+
+		生成器
+			生成器也是一种迭代器
+				这玩意是可以用for 来迭代的，每次迭代的值就是yield 返回的值
+
+			协同程序就是可以运行的独立函数调用，函数可以暂停或者挂起，并在需要的时候从程序离开或者重新开始
+			yield 相当于函数的return 语句，但是普通函数一返回这个函数就结束，生成器不会，只会返回yield后的值再暂停！
+				>>> def myGen():
+					print("生成器被执行！")
+					yield 1
+					yield 2
+				>>> a = myGen()
+				>>> next(a)
+				生成器被执行！
+				1
+				>>> next(a)
+				2
+				>>> next(a)
+				Traceback (most recent call last):
+				  File "<pyshell#9>", line 1, in <module>
+					next(a)
+				StopIteration
+
 	构造方法
 		__init__(self,[,...])
 			初始化实例属性

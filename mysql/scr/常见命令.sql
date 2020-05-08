@@ -1,0 +1,6 @@
+SHOW DATABASES;
+USE testdatabase;
+SHOW TABLES;
+SELECT tables FROM sys;
+SELECT VERSION()
+
