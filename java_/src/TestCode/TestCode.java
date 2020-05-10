@@ -1,155 +1,91 @@
 package TestCode;
 
-import TestFeatureTask.Testcode;
+import java.lang.reflect.Constructor;
 
-import java.util.Scanner;
+public class TestCode{
+    static {
+        System.out.println("类加载1");
+    }
+    static {
+        System.out.println("类加载2");
+    }
+    {
+        System.out.println("实例语句块1");
+    }
+    {
+        System.out.println("实例语句块2");
+    }
 
-public class TestCode {
-    static byte a;
-    static short b;
-    static int c;
-    static long d;
-    static float e;
-    static double f;
-    static  boolean g;
-    static char h;
+    public TestCode() {
+        System.out.println("无参构造方法");
+    }
+    public TestCode(Object a){
+        System.out.println("有参构造");
+    }
 
+    class B{}
+    static class C{}
 
-    public static void main(String[] args) {
-        System.out.println(TestCode.a);
-        System.out.println(TestCode.b);
-        System.out.println(TestCode.c);
-        System.out.println(TestCode.d);
-        System.out.println(TestCode.f);
-        System.out.println(TestCode.g);
-        System.out.println(TestCode.h);
-
-
-
-        a = 10;
-        b =2;
-        System.out.println(a+2);
-        System.out.println(a-2);
-        System.out.println(a/2);
-        System.out.println(a%2);
-        System.out.println(a++);
-        System.out.println(++a);
-        System.out.println(a--);
-        System.out.println(--a);
-
-        System.out.println(a>>1);
-
-        System.out.println(a>b);
-        System.out.println(a<b);
-        System.out.println(a == b);
-        System.out.println(a>=b);
-        System.out.println(a<=b);
-        System.out.println(a!=b);
-
-        System.out.println();
-        boolean t;
-        boolean f;
-
-        for (int i = 0; i <3 ; i++) {
-
-            switch(i){
-                case 0:
-                    t = true;
-                    f = true;
-                    break;
-                case 1:
-                    t = true;
-                    f = false;
-                    break;
-                case 2:
-                    t = false;
-                    f = true;
-                    break;
-
-                default:
-                    t = false;
-                    f = false;
+    public static void main(String[] args){
+        class D{}
+        System.out.println("main method begin");
+        A a = new A();
+        System.out.println(a.a+a.b+a.c);
+        TestCode b = new TestCode();
+        TestCode c = new TestCode(new C() {
 
 
+        });
 
-
-            }
-            System.out.println("t:" +
-                    t+
-                    " f:" +
-                    f);
-            System.out.println("t&f--->"+(t&f));
-            System.out.println("t&&f--->"+(t&f));
-
-            System.out.println("t|f--->"+(t|f));
-            System.out.println("t||f--->"+(t||f));
-            System.out.println();
-
-
-
-
-        }
-
-        System.out.println("a:" +
-                a+
-                " b:" +
-                b);
-        System.out.println(a+=b);
-        System.out.println("a:" +
-                a+
-                " b:" +
-                b);
-        System.out.println(a-=b);
-        System.out.println("a:" +
-                a+
-                " b:" +
-                b);
-        System.out.println(a*=b);
-        System.out.println("a:" +
-                a+
-                " b:" +
-                b);
-        System.out.println(a/=b);
-        System.out.println("a:" +
-                a+
-                " b:" +
-                b);
-        System.out.println(a%=b);
-        System.out.println("a:" +
-                a+
-                " b:" +
-                b);
-
-
-
-        if(a==b){
-            System.out.println("true1");
-
-        }
-        else if(a >= b){
-            System.out.println("true2");
-
-        }
-        else if (a <=b ){
-            System.out.println("true3");
-
-        }
-
-        else{
-            System.out.println("false");
-        }
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(scanner.next());
-
-
-
-
-
-
-
+    }
+    {
+        System.out.println("实例语句块3");
+    }
+    static {
+        System.out.println("类加载3");
     }
 }
 
+interface C{}
+class A{
+    int a;
+    int b;
+    int c;
 
+    public A(int a, int b, int c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public A() {
+        this(1,2,3);
+    }
+}
+
+class B extends A implements E{
+    int d;
+    int a;
+
+    public B() {
+    }
+
+    public B(int a, int b, int c, int d, int a1) {
+        super(a, b, c);
+        this.d = d;
+        this.a = a1;
+    }
+}
+
+abstract class D{
+    public abstract void a();
+    public abstract void b();
+    public abstract void c();
+
+
+}
+
+interface E extends H,I {}
+interface H{}
+interface I{}
 
