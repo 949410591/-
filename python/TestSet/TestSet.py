@@ -43,4 +43,7 @@ print(id(c))
 
 print(dir(a))
 
+print(a)
+print(5 in a)
+
 

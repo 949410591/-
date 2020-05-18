@@ -1,7 +1,6 @@
-
-a = 1,3,4,2,5,6
-print(a)
-a = (1)
-print(a)
-a = (1,)
-print(a)
+print(1>>1)
+print(1<<1)
+print(~1)
+print(1^0)
+print(1|1)
+print(1&0)

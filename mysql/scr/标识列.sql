@@ -1,0 +1,15 @@
+CREATE TABLE t(
+	id INT ,
+	t_name VARCHAR(20)
+);
+
+DROP TABLE IF EXISTS t;
+INSERT INTO t  VALUES(NULL,"john");
+INSERT INTO t(t_name) VALUES("aaa");
+
+INSERT INTO t  VALUES(10,"john");
+
+SELECT * FROM t;
+SET auto_increment_inrement = 3;
+
+ALTER TABLE t MODIFY COLUMN id INT PRIMARY KEY  AUTO_INCREMENT;

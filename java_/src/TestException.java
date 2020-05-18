@@ -11,6 +11,10 @@ public class TestException {
             System.out.println(e);
 
         }
+        finally {
+            System.out.println("结束捕捉");
+
+        }
 
         System.out.println("main方法结束");
 
@@ -29,3 +33,6 @@ public class TestException {
     }
 
 }
+
+
+

@@ -60,3 +60,8 @@ a.update(enumerate(b))
 print(a)
 a.update(zip(b,b))
 print(a)
+
+print("a" in a)
+a.__contains__()
+
+print(0 in a)
