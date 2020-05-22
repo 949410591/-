@@ -1,0 +1,106 @@
+
+
+-- 流程控制
+-- case
+
+SELECT @a;
+SET @a := 1;
+
+
+-- 作为表达式
+SELECT
+	CASE @a
+	WHEN 1 THEN 2
+	WHEN 2 THEN 4
+	ELSE 8
+	END;
+
+SELECT 
+	CASE
+	WHEN 1>2 THEN 1
+	WHEN 2>3 THEN 2
+	ELSE 4
+	END;
+
+
+SET GLOBAL log_bin_trust_function_creators = 1;
+SELECT @@global.log_bin_trust_function_creators;
+DROP FUNCTION IF EXISTS a;
+DELIMITER $
+
+
+CREATE FUNCTION a(a INT) RETURNS INT
+BEGIN
+	SELECT COUNT(*) INTO a FROM employees;
+	
+	SELECT 
+		CASE
+		WHEN 1>2 THEN 1
+		WHEN 2>3 THEN 2
+		ELSE 3
+		END
+		INTO a;
+		
+		
+	SELECT
+		CASE a
+		WHEN 1 THEN 2
+		WHEN 2 THEN 4
+		ELSE 7
+		END
+		INTO a;
+-- 作为独立语句		
+	CASE a
+	WHEN 8 THEN SET a:=1;
+	ELSE SET a= 0;
+	END CASE;
+	
+	CASE
+	WHEN 1>2 THEN SET a= 1;
+	WHEN 2>3 THEN SET a = 2;
+	ELSE SET a=3;
+	END CASE;
+	
+
+	
+	RETURN a;
+	
+
+END $
+DELIMITER ;
+SELECT a(1);
+
+
+-- if
+
+-- 作为函数
+DROP FUNCTION IF EXISTS a;
+
+DELIMITER $
+CREATE FUNCTION a(a1 INT) RETURNS INT
+BEGIN
+
+	RETURN IF(a1>1,1,0);
+END$
+DELIMITER ;
+SELECT a(1);
+
+-- 作为if结构
+
+DROP FUNCTION IF EXISTS a;
+DELIMITER $
+CREATE FUNCTION a(a INT) RETURNS INT
+
+BEGIN
+	IF a=0 THEN  RETURN 0;
+	ELSEIF a < 0 THEN  RETURN -1;
+	ELSE  RETURN 1;
+	END IF;
+	
+END$
+DELIMITER ;
+SELECT a(1);
+SELECT a(-1);
+SELECT a(0);
+	
+

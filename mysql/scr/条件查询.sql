@@ -18,13 +18,13 @@ SELECT * FROM employees WHERE salary BETWEEN 10000 AND 11000;
 
 SELECT * FROM employees WHERE job_id IN ("AC_ACCOUNT","AC_MGR","AD_VP");
 
-select job_id from employees;
+SELECT job_id FROM employees;
 
 SELECT * FROM employees WHERE commission IS NULL;
 SELECT * FROM employees WHERE commission IS NOT NULL;
 
 
-select * from employees where salary <=> null;
+SELECT * FROM employees WHERE salary <=> NULL;
 
 
 SELECT * FROM employees WHERE  salary <=> 120000;

@@ -1,107 +1,40 @@
-USE girls;
-SELECT * FROM admin;
-
+-- 存储过程
+-- 删除
+DROP PROCEDURE IF EXISTS a;
+-- 创建
 DELIMITER $
-CREATE PROCEDURE myp1()
+CREATE PROCEDURE a()
 BEGIN
-	INSERT INTO admin VALUES(NULL,"join1","0000");
-	INSERT INTO admin VALUES(NULL,"join2","0000");
-	INSERT INTO admin VALUES(NULL,"join3","0000");
-	INSERT INTO admin VALUES(NULL,"join4","0000");
-	INSERT INTO admin VALUES(NULL,"join5","0000");
-END $
-
-
-
-
-
-
-
-
-DELIMITER ;
-
-SELECT * FROM admin;
-DROP PROCEDURE myp2;
-DELIMITER $
-CREATE PROCEDURE myp2(IN beautyName VARCHAR(10))
-BEGIN
-	SELECT bo.*
-	FROM boys bo
-	RIGHT JOIN beauty b ON bo.id = boyfriend_id
-	WHERE b.name LIKE beautyName;
+	SELECT * FROM myemployees.`employees`;
 END $
 DELIMITER ;
-CALL myp2('小昭');
+-- 调用
+CALL a();
+
+-- 查看存储过程的信息
+SHOW CREATE PROCEDURE a;
 
 
-DROP PROCEDURE IF EXISTS myp3;
+-- in or out or inout
+USE myemployees;
+SELECT @a2 ;
+SELECT @a3 := 1;
+DROP PROCEDURE IF EXISTS a;
 DELIMITER $
-CREATE PROCEDURE myp3(IN un VARCHAR(10),IN pw VARCHAR(10))
+CREATE PROCEDURE a(IN a1 INT , OUT a2 INT , INOUT a3 INT)
 BEGIN
-	DECLARE result INT;
-	SELECT  COUNT(*) INTO result
-	FROM admin a
-	WHERE a.username = un AND a.password = pw;
-	SELECT 
-		CASE result
-		WHEN 1 THEN "成功"
-		ELSE "失败"
-		END
-	;
-	SELECT  
-		CASE COUNT(*)
-		WHEN 1 THEN "成功"
-		ELSE "失败"
-		END
-	FROM admin a
-	WHERE a.username = un AND a.password = pw;
+
+	SELECT a1,a3;
+	SET a3 := 1;
+	SET a2 := 2;
+	SELECT 11,22 INTO a3,a2;
+	-- 以下方式赋值参数列表没有效果
+	SELECT @a2 := 1;
+	SELECT @a3 := 1;
+
 	
-	SELECT IF(result = 1,"成功","失败");
-END $
 
-DELIMITER ;
-SELECT * FROM admin;
-CALL myp3("john","8888");
-
-
-USE girls;
-DROP PROCEDURE IF EXISTS myp4;
-DELIMITER $
-CREATE PROCEDURE myp4(IN gname VARCHAR(10), OUT bname VARCHAR(10))
-BEGIN
-	SELECT b.boyName INTO bname
-	FROM boys b
-	JOIN beauty g
-	ON b.id = g.boyfriend_id 
-	WHERE g.name = gname;
-	
 END $
 DELIMITER ;
-SELECT @bname;
-CALL myp4("小昭", @bname);
-SELECT @bname;
-
-
-DROP PROCEDURE IF EXISTS myp5;
-DELIMITER $
-CREATE PROCEDURE myp5(IN gname VARCHAR(10),INOUT bname VARCHAR(10), INOUT usercp INT)
-BEGIN
-	SELECT b.boyName, b.usercp INTO bname,usercp
-	FROM boys b
-	JOIN beauty g
-	ON g.boyfriend_id = b.id
-	WHERE g.name = gname;
-END $
-DELIMITER ;
-SELECT @bname;
-SELECT @usercp;
-CALL myp5("小昭",@bname,@usercp);
-SELECT @bname,@usercp;
-
-
-
-
-
-
-
-
+CALL a(1,@a2,@a3);
+SELECT @a2,@a3;
