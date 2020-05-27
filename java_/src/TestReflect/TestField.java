@@ -17,10 +17,6 @@ public class TestField {
                 result.append(f.getType().getSimpleName()+" ");
                 result.append(f.getName());
                 result.append(";\n");
-
-
-
-
             }
             result.append("}");
 

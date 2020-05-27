@@ -9,8 +9,6 @@ public class TestReflect {
 
         for(Class in :stringClass.getInterfaces()){
             System.out.println(in);
-
-
         }
 
     }
