@@ -1,0 +1,16 @@
+body p {
+    background: brown;
+}
+
+body >p >a{
+    background: chocolate;
+}
+
+.active +p{
+    background: darkturquoise;
+
+}
+
+.active ~p{
+    background: darkorchid;
+}

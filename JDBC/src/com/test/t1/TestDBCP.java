@@ -1,11 +1,13 @@
 package com.test.t1;
 
+import com.jdbcUtils.jdbcUtil;
 import com.jdbcUtils.jdbcUtil2;
+import com.jdbcUtils.jdbcUtil3;
 
 import java.sql.*;
 import java.util.List;
 
-public class TestPrepareStatement {
+public class TestDBCP {
     public static void main(String[] args) {
         Connection connection = null;
         PreparedStatement queryStatement = null;
@@ -16,10 +18,9 @@ public class TestPrepareStatement {
         List list = null;
 
         try {
-            Class.forName("com.jdbcUtils.jdbcUtil2");
 
 
-            list = jdbcUtil2.getConnectAndStatments();
+            list = jdbcUtil3.getConnectAndStatments();
 
             connection = (Connection) list.get(0);
             queryStatement = (PreparedStatement) list.get(1);
@@ -80,17 +81,13 @@ public class TestPrepareStatement {
 
 
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        finally {
-            jdbcUtil2.release(connection,null,resultSet);
+        } finally {
+            jdbcUtil3.release(connection,null,resultSet);
             for (int i = 1; i < list.size(); i++) {
-                jdbcUtil2.release(null, (Statement) list.get(i),null);
-                
+                jdbcUtil3.release(null, (Statement) list.get(i),null);
+
             }
         }
 
@@ -98,6 +95,5 @@ public class TestPrepareStatement {
     }
 
 
-
-
 }
+

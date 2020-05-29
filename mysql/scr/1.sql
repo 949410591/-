@@ -22,6 +22,8 @@ SELECT * FROM users WHERE `name` = "zhansan" AND `password` = "123456";
 
 SELECT * FROM users;
 
+
+
 INSERT INTO users VALUES(4,"zhaoliu",123456,'zhaoliu@sina.com',NOW());
 
 
@@ -31,7 +33,7 @@ UPDATE users SET`password` = 'root' WHERE id = 4;
 
 SELECT * FROM users WHERE id = 4;
 
-DELETE FROM users WHERE id =4;
+DELETE FROM users WHERE id =0;
 
 SELECT * FROM users;
 

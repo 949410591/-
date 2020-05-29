@@ -17,7 +17,7 @@ public class Test02 {
         Statement statement = null;
         ResultSet resultSet = null;
         try {
-            Class.forName("com.jdbcUtils.jdbcUtil");
+//            Class.forName("com.jdbcUtils.jdbcUtil");
             List list = jdbcUtil.getConnectAndStatment();
             connection = (Connection) list.get(0);
             statement = (Statement) list.get(1);
@@ -67,8 +67,6 @@ public class Test02 {
 
 
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }

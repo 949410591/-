@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        a[name]{
+            background: black;
+        }
+        a[class = "a link1"]{
+            background: darksalmon;
+        }
+        a[class *= "id"]{
+            background: darkblue;
+        }
+        a[href ^="f"]{
+            background: brown;
+        }
+        a[href $="html"]{
+            background: deeppink;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="" name="a">1</a><br>
+    <a href="fsadlfj" class="a link1">2</a><br>
+    <a href="https://www.baidu.com" class="a link2">3</a><br>
+    <a href="./1.html" class="a link3 has id attribute" id="id1">4</a><br>
+    <a href="https://www.taobao.com" class="a link3 has id attribute" id="id2">5</a><br>
+
+</body>
+</html>
