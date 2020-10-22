@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JDBC/lib/mysql-connector-java-8.0.20.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDBC/lib/c3p0-0.9.5.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDBC/lib/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDBC/lib/mchange-commons-java-0.2.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDBC/lib/commons-dbcp2-2.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JDBC/lib/commons-pool2-2.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
