@@ -25,7 +25,7 @@ class B extends A{
     * 有多少实现多少*/
 }
 
-abstract class C{
+abstract class C implements E{
     public C() {
 
     }
@@ -35,12 +35,22 @@ abstract class C{
 
 }
 
-class D extends C{
-    public D(){
+class D extends C {
+    public D() {
         super();
     }
-    public D(String c1){
+
+    public D(String c1) {
         super(c1);
     }
+
+    @Override
+    public void e() {
+
+    }
     /*抽象方法的构造方法是供子类使用的*/
+}
+interface E {
+    public void e();
+
 }

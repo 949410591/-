@@ -1,14 +1,16 @@
-public class TestStatics {
+package TestStatic;
+
+public  class TestStatic {
     public static void main(String[] args){
         Chinese c1 = new Chinese("123","lisi ");
         Chinese c2 = new Chinese("456","zhangsan");
         System.out.println(c1.id);
         System.out.println(c1.xinming);
-        System.out.println("类名.访问静态变量："+Chinese.guoji);//你可以这样直接访问
+        System.out.println("类名.访问静态变量："+ Chinese.guoji);//你可以这样直接访问
 
-        System.out.println("引用访问静态变量："+c1.guoji);//也可以引用.访问
+        System.out.println("引用访问静态变量："+c1.guoji);//也可以引用.访问，但他实际上是用类名.属性来访问的
         c1 = null;
-        System.out.println("赋值为null："+c1.guoji);//也可以引用.访问,但实际上是类名.访问的
+        System.out.println("赋值为null："+c1.guoji);//空引用.属性访问,但实际上也是是类名.访问的,也就是Chinese.gouji
     }
 
 
