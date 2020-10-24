@@ -58,6 +58,35 @@ public class TestArray {
 
 
 
+        int[][] array7  = {
+                {1, 2, 3},
+                {4,2},
+                {9,1,4,1,}
+        };
+        //静态初始化
+
+        String [][] array8 = new String[2][3];
+
+        for(int i =0; i<array7.length; i++){
+            for(int j = 0; j<array7[i].length;j++){
+                System.out.print(array7[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+        for(int i =0; i<array8.length; i++){
+            for(int j = 0; j<array8[i].length;j++){
+                System.out.print(array8[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+        //遍历二维数组
+
+
+
+
+
 
 
 
