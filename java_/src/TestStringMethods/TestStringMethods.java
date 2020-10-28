@@ -1,5 +1,7 @@
 package TestStringMethods;
 
+import com.sun.security.jgss.GSSUtil;
+
 import java.util.Arrays;
 
 public class TestStringMethods {
@@ -7,7 +9,9 @@ public class TestStringMethods {
         String s = new String("abc");
 
 
-        System.out.println(s.charAt(0));
+        System.out.println(s
+
+                .charAt(0));
         //把String当数组去索引
 
         System.out.println("abc".compareTo("aab"));
@@ -42,5 +46,35 @@ public class TestStringMethods {
 
         System.out.println("abcbcbc".lastIndexOf("bc"));
         //最后一次出现的位置
+
+        System.out.println("abc".isEmpty());
+        //判断是否是空
+
+        System.out.println("abc".length());
+        //输出字符串长度
+
+        System.out.println("abc".replace("c","CC"));
+        //代替
+
+        System.out.println(Arrays.toString("abc".split("b")));
+        //以xx元素来分割组
+
+        System.out.println(Arrays.toString("abc".toCharArray()));
+        //把字符串变为字符数组
+
+        System.out.println("abc".toUpperCase());
+        //全部大写
+
+        System.out.println("abc".toLowerCase());
+        //全部小写
+
+        System.out.println("  abc abc abc  ".trim());
+        //出去字符串前后的空格
+
+        System.out.println(String.valueOf(new Object()));
+        //把其它对象转化炜Sting类型
+
+
+
     }
 }
