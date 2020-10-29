@@ -1,3 +1,5 @@
+package TestEnum;
+
 public class TestEnum {
     public static void main(String[] args) throws Exception {
         compare result =compareNum(1,2);
