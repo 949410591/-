@@ -2,28 +2,15 @@ package Test;
 
 public class Test {
     public static void main(String[] args) {
-        var a = new A();
-
-
+        int [] aL = new int[5];
+        var a = 123;
+        Object o = new String("123");
+        String s = new Object();
     }
+
 
 }
 
-class A{
-    int a;
-    {a = 1;
-        System.out.println("1");}
-    public A(){
-        this(3);
-        System.out.println("2");
-        this.a = 2;
-    };
-    public A(int a){
-        System.out.println(3);
-        this.a = a;
-    }
-
-}
 
 
 
