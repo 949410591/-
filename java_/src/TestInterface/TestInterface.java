@@ -7,6 +7,8 @@ public class TestInterface {
         hanhan.a3();
         hanhan.a4();
         F pipi = new G();
+
+        H.h();
     }
 }
 
@@ -52,3 +54,20 @@ abstract class F{
 
 }
 class G extends F{}
+
+
+//接口可以有静态方法
+interface H{
+    public static String  h = "123";
+    
+    static void h(){
+        System.out.println("这是H接口的静态方法"+h);
+    }
+}
+
+
+
+
+
+
+

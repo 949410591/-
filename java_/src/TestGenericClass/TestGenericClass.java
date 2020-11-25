@@ -1,4 +1,4 @@
-
+package TestGenericClass;
 
 import java.net.BindException;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-public class Test008 {
+public class TestGenericClass {
     public static void main(String[] args) {
 //        Animal cat = new Cat();
 //        Animal bird = new Bird();
